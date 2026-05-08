@@ -6,10 +6,11 @@ import styles from '@/styles/ProjectsPage.module.css';
 const ProjectsPage = () => {
   return (
     <div className={styles.layout}>
-      <h1 className={styles.pageTitle}>My Projects</h1>
+      <h1 className={styles.pageTitle}>Избрани дигитални проекти</h1>
       <p className={styles.pageSubtitle}>
-        Here&apos;s a collection of my recent work. These projects showcase my
-        skills in web development, design, and problem-solving.
+        Уеб сайтове, продуктови платформи, вътрешни системи и автоматизации,
+        разработени с фокус върху реална бизнес стойност — повече запитвания,
+        по-добра организация, по-ясна комуникация и по-малко ръчна работа.
       </p>
 
       <div className={styles.container}>
@@ -23,7 +24,7 @@ const ProjectsPage = () => {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'Projects' },
+    props: { title: 'Проекти' },
   };
 }
 

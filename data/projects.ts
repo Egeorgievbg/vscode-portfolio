@@ -8,35 +8,83 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Driwwwle',
+    title: 'ThinkMove.bg',
     description:
-      'Discover creative websites and developers. A portal for you to share your projects.',
-    logo: '/logos/driwwwle.svg',
-    link: 'https://github.com/itsnitinr/driwwwle',
-    slug: 'driwwwle',
-  },
-  {
-    title: 'VSCode Portfolio',
-    description:
-      'A Visual Studio Code themed developer portfolio built with Next.js and CSS Modules.',
+      'Образователен сайт за шах академия с фокус върху деца, начинаещи, онлайн обучение и записване за първи урок.',
     logo: '/logos/vsc.svg',
-    link: 'https://github.com/itsnitinr/vscode-portfolio',
-    slug: 'vscode-portfolio',
+    link: 'https://thinkmove.bg',
+    slug: 'thinkmove-bg',
   },
   {
-    title: 'Subtrackt',
+    title: 'Summertime.bg',
     description:
-      'A simple and elegant way to track your subscriptions and save money.',
-    logo: '/logos/subtrackt.svg',
-    link: 'https://github.com/itsnitinr/subtrackt',
-    slug: 'subtrackt',
+      'Туристически сайт за ваканционни обекти с фокус върху директни запитвания, доверие, UX структура и рекламна готовност.',
+    logo: '/logos/vsc.svg',
+    link: 'https://summertime.bg',
+    slug: 'summertime-bg',
   },
   {
-    title: 'Coolify Deployments',
+    title: 'GPTS 360',
     description:
-      'VSCode extension to track and deploy your Coolify applications.',
-    logo: '/logos/coolify.svg',
-    link: 'https://github.com/itsnitinr/coolify-vscode-extension',
-    slug: 'coolify-vscode-extension',
+      'Landing page за 360° видео платформа и премиум събитийна услуга, насочена към рождени дни, партита и корпоративни събития.',
+    logo: '/logos/vsc.svg',
+    link: 'https://360.gptsprintshop.com',
+    slug: 'gpts-360',
+  },
+  {
+    title: 'GPTSBOXES.com',
+    description:
+      'Продуктово ориентиран e-commerce проект за луксозни кутии, персонализирани продукти и търговско онлайн представяне.',
+    logo: '/logos/vsc.svg',
+    link: 'https://gptsboxes.com',
+    slug: 'gptsboxes',
+  },
+  {
+    title: 'GPTS Print Shop',
+    description:
+      'Онлайн представяне на печатни услуги, персонализиран печат, продуктови категории, рекламни материали и визуални решения.',
+    logo: '/logos/vsc.svg',
+    link: 'https://gptsprintshop.com',
+    slug: 'gpts-print-shop',
+  },
+  {
+    title: 'Автошкола Ватони Плевен',
+    description:
+      'Локален lead generation сайт за автошкола с фокус върху доверие, мобилна използваемост, ясно представяне на курсове и бърз контакт.',
+    logo: '/logos/vsc.svg',
+    link: '#',
+    slug: 'avtoshkola-vatoni-pleven',
+  },
+  {
+    title: 'stg.ezd.bf',
+    description:
+      'Завършен клиентски уеб проект на стойност 2000 евро, включващ техническо изпълнение, координация и финално предаване.',
+    logo: '/logos/vsc.svg',
+    link: 'https://stg.ezd.bf',
+    slug: 'stg-ezd-bf',
+  },
+  {
+    title: 'ERP Pricing Bridge',
+    description:
+      'Технически proof-of-work проект за pricing логика, продуктови данни и интеграционен подход между бизнес системи.',
+    logo: '/logos/vsc.svg',
+    link: 'https://github.com/Egeorgievbg/ERP-Pricing-Bridge',
+    slug: 'erp-pricing-bridge',
+  },
+  {
+    title: 'Internal Printer Server',
+    description:
+      'Вътрешна система за operational automation и управление на печатни процеси, етикети и принтерна инфраструктура.',
+    logo: '/logos/vsc.svg',
+    link: 'https://github.com/Egeorgievbg/INTERNAL-PRINTER-SERVER',
+    slug: 'internal-printer-server',
+  },
+  {
+    title: 'E-Commerce Android',
+    description:
+      'Android e-commerce проект, демонстриращ мобилна логика, продуктово представяне и потребителски поток за онлайн търговия.',
+    logo: '/logos/vsc.svg',
+    link: 'https://github.com/Egeorgievbg/E-Commerce-Android',
+    slug: 'e-commerce-android',
   },
 ];

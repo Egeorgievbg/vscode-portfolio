@@ -8,40 +8,38 @@ export default function HomePage() {
   const [activeLineIndex, setActiveLineIndex] = useState(0);
 
   const codeLines = [
-    { code: 'const HomePage = () => {', type: 'function' },
+    { code: 'const digitalPartner = {', type: 'function' },
+    { code: "  name: 'Евгени Георгиев',", type: 'array-item' },
     {
-      code: '  const [isLoaded, setIsLoaded] = useState(true);',
+      code: "  role: 'Web Developer & Digital Project Partner',",
+      type: 'array-item',
+    },
+    {
+      code: "  focus: 'websites, automation, integrations',",
+      type: 'array-item',
+    },
+    {
+      code: "  stack: ['Next.js', 'Python', 'Flask', 'ERP', 'AI'],",
+      type: 'array-item',
+    },
+    {
+      code: "  mission: 'less chaos, more business value'",
+      type: 'array-item',
+    },
+    { code: '};', type: 'array-end' },
+    { code: '', type: 'blank' },
+    { code: 'function buildDigitalSystem(client) {', type: 'nested-function' },
+    {
+      code: "  const goal = 'more leads, sales and control';",
       type: 'variable',
     },
-    { code: '  const developerInfo = {', type: 'variable' },
-    { code: "    name: 'Nitin Ranganath',", type: 'array-item' },
-    { code: "    role: 'Full Stack Developer',", type: 'array-item' },
-    { code: "    bio: 'Building modern web experiences'", type: 'array-item' },
-    { code: '  };', type: 'array-end' },
-    { code: '', type: 'blank' },
-    { code: '  useEffect(() => {', type: 'nested-function' },
     {
-      code: '    document.title = `${developerInfo.name} | Portfolio`;',
+      code: "  return roadmap(client.business, goal);",
       type: 'return',
     },
-    { code: '    setIsLoaded(true);', type: 'function-call' },
-    { code: '  }, []);', type: 'close' },
+    { code: '}', type: 'close' },
     { code: '', type: 'blank' },
-    { code: '  return (', type: 'return-object' },
-    { code: '    <main className="hero-container">', type: 'object-method' },
-    { code: '      <h1>{developerInfo.name}</h1>', type: 'object-method' },
-    { code: '      <p>{developerInfo.role}</p>', type: 'object-method' },
-    { code: '      <div className="cta">', type: 'object-method' },
-    {
-      code: '        <Link href="/projects">View Projects</Link>',
-      type: 'object-method',
-    },
-    { code: '      </div>', type: 'object-method' },
-    { code: '    </main>', type: 'object-method' },
-    { code: '  );', type: 'close' },
-    { code: '};', type: 'close-function' },
-    { code: '', type: 'blank' },
-    { code: 'export default HomePage;', type: 'function-call' },
+    { code: 'export default digitalPartner;', type: 'function-call' },
   ];
 
   useEffect(() => {
@@ -91,19 +89,22 @@ export default function HomePage() {
 
         <div className={styles.infoSection}>
           <h1 className={styles.developerName}>
-            Nitin <span className={styles.accentText}>Ranganath</span>
+            Евгени <span className={styles.accentText}>Георгиев</span>
           </h1>
 
-          <div className={styles.developerRole}>Full Stack Web Developer</div>
+          <div className={styles.developerRole}>
+            Web Development • Python Automation • Digital Project Management
+          </div>
 
           <p className={styles.bio}>
-            I build elegant, responsive web applications with modern
-            technologies. Focused on clean code and intuitive user experiences.
+            Създавам сайтове, автоматизации и дигитални системи за бизнеси,
+            които искат повече заявки, по-добра организация и по-малко
+            технически хаос.
           </p>
 
           <div className={styles.actionLinks}>
             <Link href="/projects" className={styles.primaryLink}>
-              View Projects <VscArrowRight />
+              Виж проектите <VscArrowRight />
             </Link>
           </div>
         </div>
@@ -131,6 +132,6 @@ export default function HomePage() {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'Home' },
+    props: { title: 'Евгени Георгиев' },
   };
 }

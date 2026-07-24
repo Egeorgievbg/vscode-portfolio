@@ -8,7 +8,7 @@ import styles from '@/styles/Explorer.module.css';
 const explorerItems = [
   { name: 'home.tsx', path: '/', icon: '/logos/react_icon.svg' },
   { name: 'about.html', path: '/about', icon: '/logos/html_icon.svg' },
-  { name: 'services.ts', path: '/services', icon: '/logos/ts_icon.svg' },
+  { name: 'services.js', path: '/services', icon: '/logos/js_icon.svg' },
   { name: 'projects.js', path: '/projects', icon: '/logos/js_icon.svg' },
   { name: 'blog.json', path: '/articles', icon: '/logos/json_icon.svg' },
   { name: 'contact.css', path: '/contact', icon: '/logos/css_icon.svg' },

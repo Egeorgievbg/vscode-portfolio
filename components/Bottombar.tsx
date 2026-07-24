@@ -14,13 +14,13 @@ const Bottombar = () => {
     <footer className={styles.bottomBar}>
       <div className={styles.container}>
         <a
-          href="https://github.com/itsnitinr/vscode-portfolio"
+          href="https://github.com/Egeorgievbg/vscode-portfolio"
           target="_blank"
           rel="noreferrer noopener"
           className={styles.section}
         >
           <VscSourceControl className={styles.icon} />
-          <p>main</p>
+          <p>portfolio</p>
         </a>
         <div className={styles.section}>
           <VscError className={styles.icon} />
@@ -32,11 +32,11 @@ const Bottombar = () => {
       <div className={styles.container}>
         <div className={styles.section}>
           <SiNextdotjs className={styles.icon} />
-          <p>Powered by Next.js</p>
+          <p>Next.js • Python • AI • ERP/API</p>
         </div>
         <div className={styles.section}>
           <VscCheck className={styles.icon} />
-          <p>Prettier</p>
+          <p>Business-ready</p>
         </div>
         <div className={styles.section}>
           <VscBell />

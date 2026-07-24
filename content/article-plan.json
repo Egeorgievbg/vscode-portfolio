@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Сайт за къща за гости: директни резервации без посредници",
+    "slug": "sait-za-kashta-za-gosti",
+    "category": "Tourism SEO",
+    "intent": "commercial",
+    "service": "Business Website"
+  },
+  {
+    "title": "ERP интеграции: как да свържете продукти, цени и сайт?",
+    "slug": "erp-integracii-produkti-ceni-sait",
+    "category": "ERP/API",
+    "intent": "commercial investigation",
+    "service": "Automation Sprint"
+  },
+  {
+    "title": "AI lead agent срещу обикновена контактна форма",
+    "slug": "ai-lead-agent-sreshtu-kontaktna-forma",
+    "category": "AI Agents",
+    "intent": "comparison",
+    "service": "AI Marketing Launch"
+  },
+  {
+    "title": "Как да структурирате продуктов каталог за повече продажби?",
+    "slug": "produktov-katalog-poveche-prodajbi",
+    "category": "E-commerce",
+    "intent": "informational",
+    "service": "Growth Website"
+  },
+  {
+    "title": "Monthly Digital Partner: защо бизнесът има нужда от дигитален човек всеки месец?",
+    "slug": "monthly-digital-partner",
+    "category": "Digital Business",
+    "intent": "commercial",
+    "service": "Monthly Digital Partner"
+  }
+]

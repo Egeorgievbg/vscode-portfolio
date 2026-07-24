@@ -13,6 +13,12 @@ interface GithubPageProps {
 }
 
 const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME || 'Egeorgievbg';
+const FALLBACK_USER: User = {
+  login: GITHUB_USERNAME,
+  avatar_url: 'https://avatars.githubusercontent.com/u/153922151?v=4',
+  public_repos: 0,
+  followers: 0,
+};
 
 const GithubPage = ({ repos, user }: GithubPageProps) => {
   return (
@@ -29,23 +35,23 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
         <div className={styles.profileSection}>
           <div className={styles.profileInfo}>
             <Image
-              src={user.avatar_url}
+              src={user.avatar_url || FALLBACK_USER.avatar_url}
               className={styles.avatar}
-              alt={user.login}
+              alt={user.login || GITHUB_USERNAME}
               width={100}
               height={100}
               priority
             />
             <div className={styles.userInfo}>
-              <h2 className={styles.username}>{user.login}</h2>
+              <h2 className={styles.username}>{user.login || GITHUB_USERNAME}</h2>
               <div className={styles.stats}>
                 <div className={styles.statItem}>
                   <VscRepo className={styles.statIcon} />
-                  <span>{user.public_repos} публични repository проекта</span>
+                  <span>{user.public_repos || repos.length} публични repository проекта</span>
                 </div>
                 <div className={styles.statItem}>
                   <VscPerson className={styles.statIcon} />
-                  <span>{user.followers} последователи</span>
+                  <span>{user.followers || 0} последователи</span>
                 </div>
               </div>
             </div>
@@ -79,16 +85,27 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
 };
 
 export async function getStaticProps() {
-  const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
-  const user = await userRes.json();
+  let user: User = FALLBACK_USER;
+  let repos: Repo[] = [];
 
-  const repoRes = await fetch(
-    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=8`
-  );
-  const repos = await repoRes.json();
+  try {
+    const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+    if (userRes.ok) user = await userRes.json();
+
+    const repoRes = await fetch(
+      `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=8`
+    );
+    if (repoRes.ok) {
+      const repoData = await repoRes.json();
+      repos = Array.isArray(repoData) ? repoData : [];
+    }
+  } catch {
+    user = FALLBACK_USER;
+    repos = [];
+  }
 
   return {
-    props: { title: 'GitHub', repos: Array.isArray(repos) ? repos : [], user },
+    props: { title: 'GitHub', repos, user },
     revalidate: 600,
   };
 }

@@ -14,9 +14,10 @@ import styles from '@/styles/Sidebar.module.css';
 
 const sidebarTopItems = [
   { Icon: VscFiles, path: '/' },
-  { Icon: VscGithubAlt, path: '/github' },
+  { Icon: VscCode, path: '/services' },
   { Icon: VscCode, path: '/projects' },
   { Icon: VscEdit, path: '/articles' },
+  { Icon: VscGithubAlt, path: '/github' },
   { Icon: VscMail, path: '/contact' },
 ];
 
@@ -32,7 +33,7 @@ const Sidebar = () => {
     <aside className={styles.sidebar}>
       <div className={styles.sidebarTop}>
         {sidebarTopItems.map(({ Icon, path }) => (
-          <Link href={path} key={path}>
+          <Link href={path} key={path} aria-label={path}>
             <div
               className={`${styles.iconContainer} ${
                 router.pathname === path && styles.active
@@ -54,7 +55,7 @@ const Sidebar = () => {
       <div className={styles.sidebarBottom}>
         {sidebarBottomItems.map(({ Icon, path }) => (
           <div className={styles.iconContainer} key={path}>
-            <Link href={path}>
+            <Link href={path} aria-label={path}>
               <Icon
                 fill={
                   router.pathname === path

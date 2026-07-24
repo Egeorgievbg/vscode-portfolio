@@ -6,36 +6,13 @@ import { VscChevronRight } from 'react-icons/vsc';
 import styles from '@/styles/Explorer.module.css';
 
 const explorerItems = [
-  {
-    name: 'home.tsx',
-    path: '/',
-    icon: '/logos/react_icon.svg',
-  },
-  {
-    name: 'about.html',
-    path: '/about',
-    icon: '/logos/html_icon.svg',
-  },
-  {
-    name: 'contact.css',
-    path: '/contact',
-    icon: '/logos/css_icon.svg',
-  },
-  {
-    name: 'projects.js',
-    path: '/projects',
-    icon: '/logos/js_icon.svg',
-  },
-  {
-    name: 'articles.json',
-    path: '/articles',
-    icon: '/logos/json_icon.svg',
-  },
-  {
-    name: 'github.md',
-    path: '/github',
-    icon: '/logos/markdown_icon.svg',
-  },
+  { name: 'home.tsx', path: '/', icon: '/logos/react_icon.svg' },
+  { name: 'about.html', path: '/about', icon: '/logos/html_icon.svg' },
+  { name: 'services.js', path: '/services', icon: '/logos/js_icon.svg' },
+  { name: 'projects.js', path: '/projects', icon: '/logos/js_icon.svg' },
+  { name: 'blog.json', path: '/articles', icon: '/logos/json_icon.svg' },
+  { name: 'contact.css', path: '/contact', icon: '/logos/css_icon.svg' },
+  { name: 'github.md', path: '/github', icon: '/logos/markdown_icon.svg' },
 ];
 
 const Explorer = () => {
@@ -57,7 +34,7 @@ const Explorer = () => {
             className={styles.chevron}
             style={portfolioOpen ? { transform: 'rotate(90deg)' } : {}}
           />
-          Portfolio
+          evgeni-georgiev.com
         </label>
         <div
           className={styles.files}

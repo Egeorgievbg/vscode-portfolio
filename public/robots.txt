@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://evgeni-georgiev.com/sitemap.xml

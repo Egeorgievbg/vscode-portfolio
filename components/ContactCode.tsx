@@ -3,38 +3,33 @@ import styles from '@/styles/ContactCode.module.css';
 const contactItems = [
   {
     social: 'website',
-    link: 'nitinranganath.com',
-    href: 'https://nitinranganath.com',
+    link: 'evgeni-georgiev.com',
+    href: 'https://evgeni-georgiev.com',
   },
   {
     social: 'email',
-    link: 'nitinranganath@gmail.com',
-    href: 'mailto:nitinranganath@gmail.com',
+    link: 'dev@evgeni-georgiev.com',
+    href: 'mailto:dev@evgeni-georgiev.com',
   },
   {
     social: 'github',
-    link: 'itsnitinr',
-    href: 'https://github.com/itsnitinr',
+    link: 'Egeorgievbg',
+    href: 'https://github.com/Egeorgievbg',
   },
   {
-    social: 'linkedin',
-    link: 'nitinranganath',
-    href: 'https://www.linkedin.com/in/nitinranganath/',
+    social: 'service',
+    link: 'Business Website',
+    href: '/services',
   },
   {
-    social: 'twitter',
-    link: 'iamnitinr',
-    href: 'https://www.twitter.com/iamnitinr',
+    social: 'service',
+    link: 'Automation Sprint',
+    href: '/services',
   },
   {
-    social: 'telegram',
-    link: 'iamnitinr',
-    href: 'https://t.me/iamnitinr',
-  },
-  {
-    social: 'peerlist',
-    link: 'nitinranganath',
-    href: 'https://peerlist.io/nitinranganath',
+    social: 'service',
+    link: 'Monthly Digital Partner',
+    href: '/services',
   },
 ];
 
@@ -42,12 +37,12 @@ const ContactCode = () => {
   return (
     <div className={styles.code}>
       <p className={styles.line}>
-        <span className={styles.className}>.socials</span> &#123;
+        <span className={styles.className}>.businessContact</span> &#123;
       </p>
       {contactItems.map((item, index) => (
-        <p className={styles.line} key={index}>
+        <p className={styles.line} key={`${item.social}-${index}`}>
           &nbsp;&nbsp;&nbsp;{item.social}:{' '}
-          <a href={item.href} target="_blank" rel="noopener">
+          <a href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
             {item.link}
           </a>
           ;

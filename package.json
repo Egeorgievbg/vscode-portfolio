@@ -1,12 +1,14 @@
 {
-  "name": "vscode-portfolio",
-  "version": "2.0.0",
+  "name": "evgeni-vscode-portfolio",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "content:validate": "node scripts/validate-content.mjs",
+    "content:briefs": "node scripts/generate-article-briefs.mjs"
   },
   "dependencies": {
     "next": "^15.2.3",

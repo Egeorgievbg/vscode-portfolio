@@ -1,49 +1,96 @@
-# vscode-portfolio
-[![Open is Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/itsnitinr/vscode-portfolio)
+# Evgeni Georgiev — VS Code Portfolio
 
-A Visual Studio Code themed developer portfolio website built with Next.js and deployed on Vercel.
+Професионален portfolio и sales сайт за **Евгени Георгиев** — web developer, Python automation specialist и digital project partner.
 
-![vscode-portfolio banner](https://imgur.com/JXJ9mpO.gif)
+## Основни цели
 
-## Features Roadmap
+- представяне на реални клиентски и технически проекти;
+- продажба на Business Website, Growth Website и Automation Sprint услуги;
+- позициониране за Monthly Digital Partner договори;
+- собствен SEO блог за сайтове, AI, ERP/API и автоматизации;
+- устойчив път към 5 000+ € месечен оборот.
 
-- [ ] Themes and customizations
-  - [x] GitHub Dark (default)
-  - [ ] One Dark Pro
-  - [x] Dracula
-  - [x] Ayu
-  - [x] Nord
-- [ ] Interactive custom terminal
+## Основни страници
 
-For other features and themes suggestions, please open an issue.
+- `/` — позициониране и основни CTA;
+- `/about` — професионален профил;
+- `/services` — услуги и ориентировъчни цени;
+- `/projects` — portfolio;
+- `/projects/[slug]` — case studies;
+- `/articles` — собствен SEO блог;
+- `/articles/[slug]` — статии;
+- `/contact` — бизнес контакт;
+- `/github` — технически proof-of-work.
 
-## Environment Variables
+## Технологии
 
-For fetching your articles from dev.to, create an `.env.local` file inside the project directory. Check the `.env.local.example` file for more information.
+- Next.js 15
+- React 19
+- TypeScript
+- CSS Modules
+- GitHub Calendar
 
-## Running Development Server
+## Стартиране
 
 ```bash
+npm install
+npm run content:validate
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production проверка:
 
-All VSCode related components can be found in the `components` folder. To change the content of the portfolio, check out the `pages` folder. To add or remove pages, modify `components/Sidebar.jsx` and `components/Tabsbar.jsx`.
+```bash
+npm run build
+npm run start
+```
 
-## Next.js Resources
+## Content automation
 
-To learn more about Next.js, take a look at the following resources:
+Приоритетните SEO теми са в:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+content/article-plan.json
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/)
+Генериране на структурирани article briefs:
 
-## Deploy on Vercel
+```bash
+npm run content:briefs
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Проверката валидира задължителните portfolio и content файлове:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run content:validate
+```
+
+AI не публикува автоматично директно в production. Процесът е:
+
+```text
+Topic → Search intent → Brief → Draft → Human review → SEO check → Commit → Deploy
+```
+
+## Environment variables
+
+```env
+NEXT_PUBLIC_GITHUB_USERNAME=Egeorgievbg
+```
+
+При липса на променливата сайтът използва `Egeorgievbg` като безопасна стойност по подразбиране.
+
+## Deployment
+
+Проектът може да бъде публикуван във Vercel или друга Next.js съвместима среда. Домейнът е:
+
+```text
+https://evgeni-georgiev.com
+```
+
+## Security
+
+- не commit-вай API ключове;
+- използвай environment variables;
+- проверявай клиентските данни преди публикуване;
+- AI-generated съдържанието трябва да минава човешки review;
+- не публикувай чувствителни вътрешни системи или клиентска информация.

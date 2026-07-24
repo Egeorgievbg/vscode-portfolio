@@ -1,8 +1,19 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { VscArrowRight } from 'react-icons/vsc';
+import { VscArrowRight, VscMail, VscGithubAlt } from 'react-icons/vsc';
 
 import styles from '@/styles/HomePage.module.css';
+
+const skills = [
+  'Next.js',
+  'Python',
+  'Flask',
+  'ERP/API',
+  'WooCommerce',
+  'SEO/CRO',
+  'AI Automation',
+  'Project Management',
+];
 
 export default function HomePage() {
   const [activeLineIndex, setActiveLineIndex] = useState(0);
@@ -10,33 +21,20 @@ export default function HomePage() {
   const codeLines = [
     { code: 'const digitalPartner = {', type: 'function' },
     { code: "  name: 'Евгени Георгиев',", type: 'array-item' },
-    {
-      code: "  role: 'Web Developer & Digital Project Partner',",
-      type: 'array-item',
-    },
-    {
-      code: "  focus: 'websites, automation, integrations',",
-      type: 'array-item',
-    },
-    {
-      code: "  stack: ['Next.js', 'Python', 'Flask', 'ERP', 'AI'],",
-      type: 'array-item',
-    },
-    {
-      code: "  mission: 'less chaos, more business value'",
-      type: 'array-item',
-    },
+    { code: "  role: 'Web Developer & Digital Project Partner',", type: 'array-item' },
+    { code: "  focus: ['websites', 'automation', 'ERP/API', 'AI'],", type: 'array-item' },
+    { code: "  clients: 'small and medium business',", type: 'array-item' },
+    { code: "  mission: 'more leads, less chaos, better systems',", type: 'array-item' },
+    { code: "  revenueGoal: '5 000+ EUR monthly'", type: 'array-item' },
     { code: '};', type: 'array-end' },
     { code: '', type: 'blank' },
     { code: 'function buildDigitalSystem(client) {', type: 'nested-function' },
-    {
-      code: "  const goal = 'more leads, sales and control';",
-      type: 'variable',
-    },
-    {
-      code: "  return roadmap(client.business, goal);",
-      type: 'return',
-    },
+    { code: "  const goal = 'leads, sales and operational control';", type: 'variable' },
+    { code: '  return audit(client)', type: 'return' },
+    { code: '    .then(strategy)', type: 'object-method' },
+    { code: '    .then(build)', type: 'object-method' },
+    { code: '    .then(measure)', type: 'object-method' },
+    { code: '    .then(optimize);', type: 'object-method' },
     { code: '}', type: 'close' },
     { code: '', type: 'blank' },
     { code: 'export default digitalPartner;', type: 'function-call' },
@@ -93,19 +91,41 @@ export default function HomePage() {
           </h1>
 
           <div className={styles.developerRole}>
-            Web Development • Python Automation • Digital Project Management
+            Web Development • Python Automation • Digital Project Partner
           </div>
 
           <p className={styles.bio}>
-            Създавам сайтове, автоматизации и дигитални системи за бизнеси,
-            които искат повече заявки, по-добра организация и по-малко
-            технически хаос.
+            Изграждам сайтове, e-commerce структури, автоматизации и интеграции,
+            които помагат на бизнеса да получава повече заявки, да работи по-ефективно
+            и да намалява техническия хаос.
           </p>
 
+          <div className={styles.skillTags}>
+            {skills.map((skill) => (
+              <span className={styles.skillTag} key={skill}>
+                {skill}
+              </span>
+            ))}
+          </div>
+
           <div className={styles.actionLinks}>
-            <Link href="/projects" className={styles.primaryLink}>
-              Виж проектите <VscArrowRight />
+            <Link href="/contact" className={styles.primaryLink}>
+              <VscMail /> Изпрати проект <VscArrowRight />
             </Link>
+            <Link href="/services" className={styles.secondaryLink}>
+              Услуги и пакети
+            </Link>
+            <Link href="/projects" className={styles.secondaryLink}>
+              Портфолио
+            </Link>
+            <a
+              href="https://github.com/Egeorgievbg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.githubLink}
+            >
+              <VscGithubAlt /> GitHub
+            </a>
           </div>
         </div>
       </div>
@@ -132,6 +152,6 @@ export default function HomePage() {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'Евгени Георгиев' },
+    props: { title: 'Дигитален проектен партньор' },
   };
 }

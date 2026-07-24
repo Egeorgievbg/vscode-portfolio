@@ -12,15 +12,16 @@ interface GithubPageProps {
   user: User;
 }
 
+const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME || 'Egeorgievbg';
+
 const GithubPage = ({ repos, user }: GithubPageProps) => {
   return (
     <div className={styles.layout}>
       <div className={styles.pageHeading}>
-        <h1 className={styles.pageTitle}>GitHub</h1>
+        <h1 className={styles.pageTitle}>GitHub proof-of-work</h1>
         <p className={styles.pageSubtitle}>
-          Browse through my GitHub repositories and see what I&apos;ve been
-          working on. These are some of my public repositories showcasing
-          various projects and skills.
+          Публични проекти, които показват опит с web development, Android,
+          ERP/API логика, Python автоматизации и технически прототипи.
         </p>
       </div>
 
@@ -40,11 +41,11 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
               <div className={styles.stats}>
                 <div className={styles.statItem}>
                   <VscRepo className={styles.statIcon} />
-                  <span>{user.public_repos} repositories</span>
+                  <span>{user.public_repos} публични repository проекта</span>
                 </div>
                 <div className={styles.statItem}>
                   <VscPerson className={styles.statIcon} />
-                  <span>{user.followers} followers</span>
+                  <span>{user.followers} последователи</span>
                 </div>
               </div>
             </div>
@@ -52,7 +53,7 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
         </div>
 
         <div className={styles.sectionHeader}>
-          <h3 className={styles.sectionTitle}>Popular Repositories</h3>
+          <h3 className={styles.sectionTitle}>Последно обновени repository проекти</h3>
         </div>
         <div className={styles.reposContainer}>
           {repos.map((repo) => (
@@ -61,7 +62,7 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
         </div>
         <div className={styles.contributions}>
           <GitHubCalendar
-            username={process.env.NEXT_PUBLIC_GITHUB_USERNAME!}
+            username={GITHUB_USERNAME}
             hideColorLegend
             hideMonthLabels
             colorScheme="dark"
@@ -69,9 +70,7 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
               dark: ['#161B22', '#0e4429', '#006d32', '#26a641', '#39d353'],
               light: ['#161B22', '#0e4429', '#006d32', '#26a641', '#39d353'],
             }}
-            style={{
-              width: '100%',
-            }}
+            style={{ width: '100%' }}
           />
         </div>
       </div>
@@ -80,18 +79,16 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
 };
 
 export async function getStaticProps() {
-  const userRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}`
-  );
+  const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
   const user = await userRes.json();
 
   const repoRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}/repos?sort=pushed&per_page=6`
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&per_page=8`
   );
   const repos = await repoRes.json();
 
   return {
-    props: { title: 'GitHub', repos, user },
+    props: { title: 'GitHub', repos: Array.isArray(repos) ? repos : [], user },
     revalidate: 600,
   };
 }

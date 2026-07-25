@@ -15,8 +15,8 @@ const CustomHead = ({
   noindex = false,
 }: CustomHeadProps) => {
   const router = useRouter();
-  const canonicalUrl = canonical || `https://evgeni-georgiev.com${router.asPath.split('?')[0]}`;
-  const shouldNoindex = noindex || router.pathname === '/settings';
+  const canonicalUrl =
+    canonical || `https://evgeni-georgiev.com${router.asPath.split('?')[0]}`;
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -48,7 +48,6 @@ const CustomHead = ({
         name="keywords"
         content="Евгени Георгиев, изработка на сайт, Python автоматизация, ERP интеграции, API интеграции, дигитален проектен партньор, SEO, CRO, e-commerce"
       />
-      <meta name="robots" content={shouldNoindex ? 'noindex,follow' : 'index,follow'} />
       <link rel="canonical" href={canonicalUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
@@ -56,7 +55,8 @@ const CustomHead = ({
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Евгени Георгиев" />
       <meta name="twitter:card" content="summary_large_image" />
-      {!shouldNoindex && (
+      {noindex && <meta name="robots" content="noindex,follow" />}
+      {!noindex && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

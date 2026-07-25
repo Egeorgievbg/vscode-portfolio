@@ -35,6 +35,8 @@ export async function getStaticProps() {
   return {
     props: {
       title: '404 — Страницата не е намерена',
+      description: 'Търсената страница в evgeni-georgiev.com не е намерена.',
+      canonical: 'https://evgeni-georgiev.com/404',
       noindex: true,
     },
   };

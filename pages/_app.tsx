@@ -7,7 +7,15 @@ import Head from '@/components/Head';
 import '@/styles/globals.css';
 import '@/styles/themes.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
+interface PortfolioPageProps {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  noindex?: boolean;
+  [key: string]: unknown;
+}
+
+function MyApp({ Component, pageProps }: AppProps<PortfolioPageProps>) {
   useEffect(() => {
     const theme = localStorage.getItem('theme');
     if (theme) {
@@ -17,7 +25,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Layout>
-      <Head title={`Евгени Георгиев | ${pageProps.title || 'Дигитален проектен партньор'}`} />
+      <Head
+        title={`Евгени Георгиев | ${pageProps.title || 'Дигитален проектен партньор'}`}
+        description={pageProps.description}
+        canonical={pageProps.canonical}
+        noindex={pageProps.noindex}
+      />
       <Component {...pageProps} />
     </Layout>
   );

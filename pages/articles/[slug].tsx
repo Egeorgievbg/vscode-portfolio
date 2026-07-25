@@ -25,7 +25,9 @@ const ArticlePage = ({ article }: { article: PortfolioArticle }) => {
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Искаш да приложим това за твоя бизнес?</h2>
-            <p className={styles.paragraph}>Мога да помогна със сайт, SEO структура, AI агент, автоматизация или дигитална поддръжка.</p>
+            <p className={styles.paragraph}>
+              Мога да помогна със сайт, SEO структура, AI агент, автоматизация или дигитална поддръжка.
+            </p>
             <Link href="/contact">Изпрати запитване →</Link>
           </section>
         </div>
@@ -42,7 +44,15 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const article = articles.find((item) => item.slug === params?.slug);
   if (!article) return { notFound: true };
-  return { props: { title: article.title, article } };
+
+  return {
+    props: {
+      title: article.title,
+      description: article.description,
+      canonical: `https://evgeni-georgiev.com/articles/${article.slug}`,
+      article,
+    },
+  };
 };
 
 export default ArticlePage;

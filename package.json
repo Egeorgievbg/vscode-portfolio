@@ -11,9 +11,10 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "routes:verify": "node scripts/verify-routes.mjs",
     "content:validate": "node scripts/validate-content.mjs",
     "content:briefs": "node scripts/generate-article-briefs.mjs",
-    "verify": "npm run content:validate && npm run lint && npm run typecheck && npm run build"
+    "verify": "npm run content:validate && npm run routes:verify && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "^15.2.3",

@@ -9,7 +9,9 @@ const ProjectCaseStudy = ({ project }: { project: Project }) => {
       <div className={styles.content}>
         <Link href="/projects">← Всички проекти</Link>
         <h1 className={styles.title}>{project.title}</h1>
-        <div className={styles.subtitle}>{project.category} • {project.industry} • {project.status}</div>
+        <div className={styles.subtitle}>
+          {project.category} • {project.industry} • {project.status}
+        </div>
 
         <div className={styles.aboutContent}>
           <section className={styles.section}>
@@ -39,7 +41,9 @@ const ProjectCaseStudy = ({ project }: { project: Project }) => {
 
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Имаш подобен проект?</h2>
-            <p className={styles.paragraph}>Мога да помогна със структура, сайт, автоматизация или техническа координация.</p>
+            <p className={styles.paragraph}>
+              Мога да помогна със структура, сайт, автоматизация или техническа координация.
+            </p>
             <Link href="/contact">Изпрати запитване →</Link>
           </section>
         </div>
@@ -56,7 +60,15 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const project = projects.find((item) => item.slug === params?.slug);
   if (!project) return { notFound: true };
-  return { props: { title: project.title, project } };
+
+  return {
+    props: {
+      title: `${project.title} — Case Study`,
+      description: project.description,
+      canonical: `https://evgeni-georgiev.com/projects/${project.slug}`,
+      project,
+    },
+  };
 };
 
 export default ProjectCaseStudy;

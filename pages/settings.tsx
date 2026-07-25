@@ -49,7 +49,12 @@ const SettingsPage = () => {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'Settings' },
+    props: {
+      title: 'Визуални настройки',
+      description: 'Избор на визуална тема за портфолиото на Евгени Георгиев.',
+      canonical: 'https://evgeni-georgiev.com/settings',
+      noindex: true,
+    },
   };
 }
 

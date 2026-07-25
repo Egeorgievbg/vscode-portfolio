@@ -5,15 +5,18 @@ interface CustomHeadProps {
   title: string;
   description?: string;
   canonical?: string;
+  noindex?: boolean;
 }
 
 const CustomHead = ({
   title,
   description = 'Евгени Георгиев изгражда бизнес сайтове, e-commerce структури, Python автоматизации, ERP/API интеграции и дигитални процеси за малък и среден бизнес.',
   canonical,
+  noindex = false,
 }: CustomHeadProps) => {
   const router = useRouter();
-  const canonicalUrl = canonical || `https://evgeni-georgiev.com${router.asPath.split('?')[0]}`;
+  const canonicalUrl =
+    canonical || `https://evgeni-georgiev.com${router.asPath.split('?')[0]}`;
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -52,10 +55,13 @@ const CustomHead = ({
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Евгени Георгиев" />
       <meta name="twitter:card" content="summary_large_image" />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      {noindex && <meta name="robots" content="noindex,follow" />}
+      {!noindex && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      )}
     </Head>
   );
 };

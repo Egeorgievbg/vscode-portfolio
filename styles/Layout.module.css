@@ -1,45 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
-
 .main {
   display: flex;
-  background: var(--main-bg);
-  overflow-x: hidden;
+  min-height: calc(100vh - 52px);
+  background: transparent;
+  overflow: hidden;
 }
 
 .content {
-  padding: 2rem;
-  color: var(--text-color);
-  font-family: 'JetBrains Mono', monospace;
+  position: relative;
   flex: 1;
-  height: 85vh;
+  height: calc(100vh - 74px);
   overflow-y: auto;
-  scroll-behavior: smooth;
   overflow-x: hidden;
-  display: flex;
-  align-items: center;
+  padding: clamp(1.25rem, 3vw, 3rem);
+  color: var(--text-color);
+  scroll-behavior: smooth;
+  background:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 44px 44px;
 }
 
-.content {
-  scrollbar-width: 10px;
-  scrollbar-color: var(--accent-color);
+.content::before {
+  content: '';
+  position: fixed;
+  inset: 50px 0 22px 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(5,7,11,.2), rgba(5,7,11,.75));
+  z-index: 0;
 }
 
-.content::-webkit-scrollbar {
-  width: 15px;
+.content > * {
+  position: relative;
+  z-index: 1;
 }
 
-.content::-webkit-scrollbar-track {
-  background: var(--scrollbar-track-bg);
-  border-left: 1px solid #1e1f29;
-}
-
+.content::-webkit-scrollbar { width: 10px; }
+.content::-webkit-scrollbar-track { background: rgba(255,255,255,.02); }
 .content::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb-bg);
-  border-left: 1px solid #1e1f29;
+  background: rgba(var(--accent-color-rgb), .38);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 760px) {
   .content {
-    padding: 2rem 1rem;
+    padding: 1.25rem .9rem 5rem;
+    height: calc(100vh - 64px);
   }
 }

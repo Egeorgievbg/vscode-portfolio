@@ -1,14 +1,19 @@
 {
   "name": "evgeni-vscode-portfolio",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
+  "engines": {
+    "node": ">=20 <23"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "content:validate": "node scripts/validate-content.mjs",
-    "content:briefs": "node scripts/generate-article-briefs.mjs"
+    "content:briefs": "node scripts/generate-article-briefs.mjs",
+    "verify": "npm run content:validate && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "next": "^15.2.3",

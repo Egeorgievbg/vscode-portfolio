@@ -1,157 +1,129 @@
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { VscArrowRight, VscMail, VscGithubAlt } from 'react-icons/vsc';
+import {
+  VscArrowRight,
+  VscCheck,
+  VscGithubAlt,
+  VscGraph,
+  VscMail,
+  VscRocket,
+  VscTerminal,
+} from 'react-icons/vsc';
 
 import styles from '@/styles/HomePage.module.css';
 
-const skills = [
-  'Next.js',
-  'Python',
-  'Flask',
-  'ERP/API',
-  'WooCommerce',
-  'SEO/CRO',
-  'AI Automation',
-  'Project Management',
+const capabilities = [
+  'Business websites',
+  'Python automation',
+  'ERP/API integrations',
+  'SEO & CRO',
+  'AI workflows',
+  'Digital project management',
+];
+
+const proof = [
+  { value: '10+', label: 'реални проекта' },
+  { value: '5', label: 'пакетирани услуги' },
+  { value: 'B2B', label: 'технически фокус' },
 ];
 
 export default function HomePage() {
-  const [activeLineIndex, setActiveLineIndex] = useState(0);
-
-  const codeLines = [
-    { code: 'const digitalPartner = {', type: 'function' },
-    { code: "  name: 'Евгени Георгиев',", type: 'array-item' },
-    { code: "  role: 'Web Developer & Digital Project Partner',", type: 'array-item' },
-    { code: "  focus: ['websites', 'automation', 'ERP/API', 'AI'],", type: 'array-item' },
-    { code: "  clients: 'small and medium business',", type: 'array-item' },
-    { code: "  mission: 'more leads, less chaos, better systems',", type: 'array-item' },
-    { code: "  revenueGoal: '5 000+ EUR monthly'", type: 'array-item' },
-    { code: '};', type: 'array-end' },
-    { code: '', type: 'blank' },
-    { code: 'function buildDigitalSystem(client) {', type: 'nested-function' },
-    { code: "  const goal = 'leads, sales and operational control';", type: 'variable' },
-    { code: '  return audit(client)', type: 'return' },
-    { code: '    .then(strategy)', type: 'object-method' },
-    { code: '    .then(build)', type: 'object-method' },
-    { code: '    .then(measure)', type: 'object-method' },
-    { code: '    .then(optimize);', type: 'object-method' },
-    { code: '}', type: 'close' },
-    { code: '', type: 'blank' },
-    { code: 'export default digitalPartner;', type: 'function-call' },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveLineIndex((prev) => (prev + 1) % codeLines.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, [codeLines.length]);
-
   return (
-    <div className={styles.heroLayout}>
-      <div className={styles.container}>
-        <div className={styles.codeSection}>
-          <div className={styles.codeContainer}>
-            <div className={styles.editorContent}>
-              <div className={styles.lineNumbers}>
-                {codeLines.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`${styles.lineNumber} ${
-                      index === activeLineIndex ? styles.activeLine : ''
-                    }`}
-                  >
-                    {index + 1}
-                  </div>
-                ))}
-              </div>
-
-              <div className={styles.codeEditor}>
-                {codeLines.map((line, index) => (
-                  <div
-                    key={index}
-                    className={`${styles.codeLine} ${styles[line.type]} ${
-                      index === activeLineIndex ? styles.highlightedLine : ''
-                    }`}
-                  >
-                    {line.code}
-                  </div>
-                ))}
-              </div>
-
-              <div className={styles.overlayGlow}></div>
-            </div>
+    <div className={styles.page}>
+      <section className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <div className={styles.availability}>
+            <span className={styles.statusDot} /> Приемам нови проекти
           </div>
-        </div>
 
-        <div className={styles.infoSection}>
-          <h1 className={styles.developerName}>
-            Евгени <span className={styles.accentText}>Георгиев</span>
+          <p className={styles.kicker}>WEB • AUTOMATION • AI • ERP/API</p>
+          <h1 className={styles.title}>
+            Дигитални системи,
+            <span> които движат бизнеса.</span>
           </h1>
-
-          <div className={styles.developerRole}>
-            Web Development • Python Automation • Digital Project Partner
-          </div>
-
-          <p className={styles.bio}>
-            Изграждам сайтове, e-commerce структури, автоматизации и интеграции,
-            които помагат на бизнеса да получава повече заявки, да работи по-ефективно
-            и да намалява техническия хаос.
+          <p className={styles.lead}>
+            Аз съм Евгени Георгиев. Превръщам разпилени идеи и ръчни процеси в
+            ясни сайтове, автоматизации и интеграции, които носят заявки, контрол
+            и измерима бизнес стойност.
           </p>
 
-          <div className={styles.skillTags}>
-            {skills.map((skill) => (
-              <span className={styles.skillTag} key={skill}>
-                {skill}
-              </span>
+          <div className={styles.actions}>
+            <Link href="/contact" className={styles.primaryAction}>
+              <VscRocket /> Обсъди проект <VscArrowRight />
+            </Link>
+            <Link href="/projects" className={styles.secondaryAction}>
+              Виж case studies
+            </Link>
+          </div>
+
+          <div className={styles.proofGrid}>
+            {proof.map((item) => (
+              <div className={styles.proofItem} key={item.label}>
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </div>
             ))}
           </div>
+        </div>
 
-          <div className={styles.actionLinks}>
-            <Link href="/contact" className={styles.primaryLink}>
-              <VscMail /> Изпрати проект <VscArrowRight />
-            </Link>
-            <Link href="/services" className={styles.secondaryLink}>
-              Услуги и пакети
-            </Link>
-            <Link href="/projects" className={styles.secondaryLink}>
-              Портфолио
-            </Link>
-            <a
-              href="https://github.com/Egeorgievbg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.githubLink}
-            >
-              <VscGithubAlt /> GitHub
-            </a>
+        <div className={styles.commandCenter}>
+          <div className={styles.windowTop}>
+            <div className={styles.windowDots}><span /><span /><span /></div>
+            <span>growth-system.ts</span>
+            <VscTerminal />
+          </div>
+          <div className={styles.codeBody}>
+            <div><span className={styles.purple}>const</span> partner = {'{'}</div>
+            <div>&nbsp;&nbsp;name: <span className={styles.orange}>'Евгени Георгиев'</span>,</div>
+            <div>&nbsp;&nbsp;role: <span className={styles.orange}>'Digital Project Partner'</span>,</div>
+            <div>&nbsp;&nbsp;system: [</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span className={styles.orange}>'strategy'</span>, <span className={styles.orange}>'build'</span>, <span className={styles.orange}>'measure'</span>,</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span className={styles.orange}>'automate'</span>, <span className={styles.orange}>'optimize'</span></div>
+            <div>&nbsp;&nbsp;],</div>
+            <div>&nbsp;&nbsp;result: <span className={styles.green}>'more revenue, less chaos'</span></div>
+            <div>{'}'};</div>
+            <div className={styles.codeBlank} />
+            <div><span className={styles.blue}>deploy</span>(partner).<span className={styles.blue}>scale</span>();</div>
+          </div>
+          <div className={styles.terminalOutput}>
+            <div><VscCheck /> SYSTEM READY</div>
+            <div><VscGraph /> KPI TRACKING ENABLED</div>
+            <div><VscCheck /> BUSINESS LOGIC CONNECTED</div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className={styles.decorElements}>
-        <div className={styles.codeFlare}></div>
-        <div className={styles.gridLines}></div>
-        <div className={styles.codeBlock1}>{'{'}</div>
-        <div className={styles.codeBlock2}>{'}'}</div>
-        <div className={styles.codeBlock3}>{'<>'}</div>
-        <div className={styles.codeBlock4}>{'/>'}</div>
-        <div className={styles.orb1}></div>
-        <div className={styles.orb2}></div>
-        <div className={styles.orb3}></div>
-        <div className={styles.codeSymbol1}>{'()'}</div>
-        <div className={styles.codeSymbol2}>{'[]'}</div>
-        <div className={styles.codeSymbol3}>{'=>'}</div>
-        <div className={styles.dotPattern}></div>
-        <div className={styles.mobileAccent}></div>
-      </div>
+      <section className={styles.capabilities}>
+        <div className={styles.sectionHeading}>
+          <span>01 / CAPABILITIES</span>
+          <h2>Една точка на отговорност за целия дигитален проект.</h2>
+        </div>
+        <div className={styles.capabilityGrid}>
+          {capabilities.map((item, index) => (
+            <div className={styles.capabilityCard} key={item}>
+              <span>0{index + 1}</span>
+              <h3>{item}</h3>
+              <p>Стратегия, техническо изпълнение и бизнес логика в една система.</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.bottomCta}>
+        <div>
+          <span>READY TO BUILD?</span>
+          <h2>Нека превърнем следващата ти идея в работещ актив.</h2>
+        </div>
+        <div className={styles.ctaLinks}>
+          <Link href="/contact"><VscMail /> Изпрати запитване</Link>
+          <a href="https://github.com/Egeorgievbg" target="_blank" rel="noopener noreferrer">
+            <VscGithubAlt /> GitHub proof-of-work
+          </a>
+        </div>
+      </section>
     </div>
   );
 }
 
 export async function getStaticProps() {
-  return {
-    props: { title: 'Дигитален проектен партньор' },
-  };
+  return { props: { title: 'Дигитален проектен партньор' } };
 }

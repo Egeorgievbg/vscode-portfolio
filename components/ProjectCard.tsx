@@ -11,30 +11,36 @@ interface ProjectCardProps {
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <article className={styles.card}>
-      <div className={styles.content}>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
+      <div className={styles.cardTop}>
+        <div className={styles.meta}>
           <span>{project.category}</span>
-          <span>•</span>
-          <span>{project.status}</span>
+          <span className={styles.status}>{project.status}</span>
         </div>
+        <span className={styles.index}>/{project.slug.slice(0, 2).toUpperCase()}</span>
+      </div>
 
+      <div className={styles.content}>
+        <p className={styles.industry}>{project.industry}</p>
         <h3 className={styles.title}>{project.title}</h3>
         <p className={styles.description}>{project.description}</p>
 
-        <p className={styles.description}>
-          <strong>Бизнес цел:</strong> {project.businessGoal}
-        </p>
-
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', margin: '16px 0' }}>
-          {project.technologies.slice(0, 5).map((technology) => (
-            <span key={technology}>#{technology}</span>
-          ))}
+        <div className={styles.goal}>
+          <span>Business objective</span>
+          <p>{project.businessGoal}</p>
         </div>
 
-        <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
-          <Link href={`/projects/${project.slug}`}>
-            Виж case study <VscArrowRight />
-          </Link>
+        <div className={styles.tags}>
+          {project.technologies.slice(0, 5).map((technology) => (
+            <span key={technology}>{technology}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.actions}>
+        <Link href={`/projects/${project.slug}`} className={styles.caseStudy}>
+          Case study <VscArrowRight />
+        </Link>
+        <div className={styles.externalLinks}>
           {project.link && (
             <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`Отвори ${project.title}`}>
               <VscLinkExternal />

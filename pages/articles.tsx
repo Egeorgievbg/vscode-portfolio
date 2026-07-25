@@ -1,23 +1,27 @@
 import Link from 'next/link';
+import { VscArrowRight } from 'react-icons/vsc';
 import { articles } from '@/data/articles';
-import styles from '@/styles/ArticlesPage.module.css';
+import styles from '@/styles/ProjectsPage.module.css';
 
 const ArticlesPage = () => {
   return (
     <div className={styles.layout}>
-      <h1 className={styles.pageTitle}>Блог за сайтове, AI и автоматизации</h1>
+      <h1 className={styles.pageTitle}>Практически знания за сайтове, AI и автоматизации.</h1>
       <p className={styles.pageSubtitle}>
-        Практически статии за малък и среден бизнес, базирани на реални проекти,
-        технически опит и конкретни бизнес задачи.
+        Съдържание, изградено върху реални бизнес проблеми, технически решения и конкретни стъпки за растеж.
       </p>
       <div className={styles.container}>
         {articles.map((article) => (
-          <article key={article.slug} style={{ padding: 22, border: '1px solid var(--border-color)', borderRadius: 12 }}>
-            <p>{article.category}</p>
-            <h2>{article.title}</h2>
-            <p>{article.description}</p>
-            <p>{article.keywords.map((keyword) => `#${keyword}`).join(' ')}</p>
-            <Link href={`/articles/${article.slug}`}>Прочети статията →</Link>
+          <article key={article.slug} className={styles.articleCard}>
+            <p className={styles.cardEyebrow}>{article.category}</p>
+            <h2 className={styles.cardTitle}>{article.title}</h2>
+            <p className={styles.cardText}>{article.description}</p>
+            <div className={styles.keywordRow}>
+              {article.keywords.slice(0, 5).map((keyword) => <span key={keyword}>#{keyword}</span>)}
+            </div>
+            <Link href={`/articles/${article.slug}`} className={styles.cardLink}>
+              Прочети статията <VscArrowRight />
+            </Link>
           </article>
         ))}
       </div>

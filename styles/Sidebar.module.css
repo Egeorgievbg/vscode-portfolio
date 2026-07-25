@@ -1,64 +1,58 @@
 .sidebar {
-  background: var(--sidebar-bg);
+  width: 58px;
+  min-width: 58px;
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 4.5vw;
-  min-width: 40px;
-  height: calc(100vh - 30px - 25px);
+  background: rgba(7,10,15,.96);
+  border-right: 1px solid rgba(255,255,255,.07);
 }
-
 .iconContainer {
-  cursor: pointer;
+  position: relative;
   width: 100%;
+  cursor: pointer;
+  transition: background .2s ease;
 }
-
-.iconContainer:hover {
-  background: var(--sidebar-hover-bg);
+.iconContainer:hover { background: rgba(255,255,255,.045); }
+.active { background: rgba(var(--accent-color-rgb), .07); }
+.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: var(--accent-color);
+  box-shadow: 0 0 16px rgba(var(--accent-color-rgb), .65);
 }
-
-.active {
-  border-left: 2px solid var(--accent-color);
-}
-
 .icon {
-  height: 48px;
-  width: 48px;
-  padding: 0.65rem 0;
+  height: 52px;
+  width: 52px;
+  padding: .9rem;
   display: block;
   margin: 0 auto;
+  opacity: .72;
+  transition: opacity .2s ease, transform .2s ease;
 }
-
-@media screen and (min-width: 2000px) {
+.iconContainer:hover .icon { opacity: 1; transform: translateY(-1px); }
+@media (max-width: 700px) {
   .sidebar {
-    width: 2.5vw;
+    position: fixed;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    min-width: 100%;
+    height: 54px;
+    flex-direction: row;
+    border-right: 0;
+    border-top: 1px solid rgba(255,255,255,.08);
   }
-}
-
-@media screen and (max-width: 1100px) {
-  .sidebar {
-    width: 6vw;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .sidebar {
-    width: 8vw;
-  }
-  .icon {
-    height: 48px;
-    width: 48px;
-    padding: 0.6rem;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .sidebar {
-    width: 10vw;
-  }
-  .icon {
-    height: 40px;
-    width: 40px;
-    padding: 0.6rem;
-  }
+  .sidebar > div { display: flex; }
+  .iconContainer { width: 48px; }
+  .icon { width: 46px; height: 46px; padding: .75rem; }
+  .active::before { left: 8px; right: 8px; top: auto; bottom: 0; width: auto; height: 3px; }
 }

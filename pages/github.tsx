@@ -62,9 +62,16 @@ const GithubPage = ({ repos, user }: GithubPageProps) => {
           <h3 className={styles.sectionTitle}>Последно обновени repository проекти</h3>
         </div>
         <div className={styles.reposContainer}>
-          {repos.map((repo) => (
-            <RepoCard key={repo.id} repo={repo} />
-          ))}
+          {repos.length > 0 ? (
+            repos.map((repo) => <RepoCard key={repo.id} repo={repo} />)
+          ) : (
+            <p className={styles.pageSubtitle}>
+              GitHub API временно не върна repository данни. Профилът остава достъпен на{' '}
+              <a href="https://github.com/Egeorgievbg" target="_blank" rel="noopener noreferrer">
+                github.com/Egeorgievbg
+              </a>.
+            </p>
+          )}
         </div>
         <div className={styles.contributions}>
           <GitHubCalendar
@@ -105,7 +112,14 @@ export async function getStaticProps() {
   }
 
   return {
-    props: { title: 'GitHub', repos, user },
+    props: {
+      title: 'GitHub',
+      description:
+        'Публични GitHub проекти на Евгени Георгиев за web development, Android, ERP/API и Python автоматизации.',
+      canonical: 'https://evgeni-georgiev.com/github',
+      repos,
+      user,
+    },
     revalidate: 600,
   };
 }

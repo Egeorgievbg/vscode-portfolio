@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Евгени Георгиев — портфолио</title>
+</head>
+<body>
+<script>
+(async () => {
+  const base = 'https://raw.githubusercontent.com/Egeorgievbg/vscode-portfolio/portfolio-v2-live/public/evgeni-v2/';
+  const urls = [1, 2, 3, 4, 5].map((n) => base + 'chunk-' + n + '.txt');
+  try {
+    const parts = await Promise.all(urls.map(async (url) => {
+      const response = await fetch(url, { cache: 'no-store' });
+      if (!response.ok) throw new Error('HTTP ' + response.status + ' for ' + url);
+      return response.text();
+    }));
+    document.open();
+    document.write(parts.join(''));
+    document.close();
+  } catch (error) {
+    console.error(error);
+    document.body.innerHTML = '<main style="font-family:system-ui;padding:40px;max-width:760px;margin:auto"><h1>Временен проблем при зареждането</h1><p>Моля, презаредете страницата.</p></main>';
+  }
+})();
+</script>
+</body>
+</html>

@@ -15,14 +15,23 @@
 
 .hero {
   position: relative;
-  min-height: 100svh;
-  padding: 28px clamp(20px, 4vw, 72px) 24px;
+  min-height: 185svh;
+  padding: 0 clamp(20px, 4vw, 72px);
   border-bottom: 1px solid var(--v2-line);
 }
 
+.heroStage {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
 .heroGrid {
+  position: relative;
   width: min(1640px, 100%);
-  min-height: calc(100svh - 90px);
+  min-height: 100svh;
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1.02fr) minmax(480px, .98fr);
@@ -197,6 +206,7 @@
 }
 
 .manifesto,
+.architectureStory,
 .capabilities,
 .work,
 .prototypeCta {
@@ -425,5 +435,441 @@
 
   .projectRow p {
     display: none;
+  }
+}
+
+
+.heroStory {
+  position: absolute;
+  right: 0;
+  bottom: 12%;
+  z-index: 5;
+  width: min(360px, 28vw);
+  padding: 18px 20px;
+  border: 1px solid rgba(186,255,42,.18);
+  background: rgba(8,10,8,.74);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+}
+
+.heroStory > span,
+.heroTimeline {
+  font: 600 10px/1.4 'JetBrains Mono', monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.heroStory > span {
+  color: var(--v2-accent);
+}
+
+.heroStory strong {
+  display: block;
+  margin-top: 11px;
+  color: var(--v2-text);
+  font-size: .9rem;
+  line-height: 1.35;
+  letter-spacing: .02em;
+}
+
+.heroStory p {
+  margin-top: 9px;
+  color: var(--v2-muted);
+  font-size: .78rem;
+  line-height: 1.55;
+}
+
+.heroTimeline {
+  position: absolute;
+  left: 0;
+  bottom: 26px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgba(235,241,224,.33);
+}
+
+.heroTimeline i {
+  width: clamp(18px, 3vw, 48px);
+  height: 1px;
+  background: rgba(186,255,42,.2);
+}
+
+.architectureStory {
+  padding-top: clamp(100px, 11vw, 180px);
+}
+
+.architectureIntro {
+  max-width: 1180px;
+  margin-bottom: 80px;
+}
+
+.architectureIntro h2 {
+  margin-top: 28px;
+  font-size: clamp(3rem, 6.5vw, 7.8rem);
+  line-height: .9;
+  letter-spacing: -.07em;
+  text-transform: uppercase;
+}
+
+.architectureLayout {
+  display: grid;
+  grid-template-columns: minmax(300px,.72fr) minmax(520px,1.28fr);
+  gap: clamp(42px, 7vw, 110px);
+  align-items: start;
+}
+
+.architectureSteps {
+  padding-bottom: 22vh;
+}
+
+.architectureStep {
+  min-height: 56vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 42px 0;
+  border-top: 1px solid var(--v2-line);
+  opacity: .28;
+  transition: opacity .35s ease;
+}
+
+.architectureStep:last-child {
+  border-bottom: 1px solid var(--v2-line);
+}
+
+.architectureStep[data-active='true'] {
+  opacity: 1;
+}
+
+.architectureStep > span {
+  color: var(--v2-accent);
+  font: 600 10px/1 'JetBrains Mono', monospace;
+  letter-spacing: .12em;
+}
+
+.architectureStep h3 {
+  margin-top: 26px;
+  font-size: clamp(2rem, 3.4vw, 4.3rem);
+  line-height: .95;
+  letter-spacing: -.055em;
+}
+
+.architectureStep p {
+  max-width: 520px;
+  margin-top: 22px;
+  color: var(--v2-muted);
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.architectureSticky {
+  position: sticky;
+  top: 13vh;
+  height: 74vh;
+  min-height: 570px;
+}
+
+.architectureVisual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--v2-line);
+  background:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+    radial-gradient(circle at 50% 48%, rgba(186,255,42,.08), transparent 30%),
+    #090c09;
+  background-size: 38px 38px, 38px 38px, auto, auto;
+}
+
+.architectureVisual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.45));
+}
+
+.archNode {
+  position: absolute;
+  z-index: 3;
+  min-width: 84px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0 12px;
+  border: 1px solid rgba(238,245,229,.16);
+  background: #0d110d;
+  color: rgba(238,245,229,.38);
+  font: 700 9px/1 'JetBrains Mono', monospace;
+  letter-spacing: .1em;
+  transition:
+    color .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease,
+    background .35s ease,
+    transform .35s ease;
+}
+
+.architectureVisual[data-phase='0'] [data-node='web'],
+.architectureVisual[data-phase='0'] [data-node='api'],
+.architectureVisual[data-phase='0'] [data-node='core'],
+.architectureVisual[data-phase='1'] [data-node='core'],
+.architectureVisual[data-phase='1'] [data-node='erp'],
+.architectureVisual[data-phase='1'] [data-node='warehouse'],
+.architectureVisual[data-phase='1'] [data-node='data'],
+.architectureVisual[data-phase='2'] [data-node='data'],
+.architectureVisual[data-phase='2'] [data-node='ai'],
+.architectureVisual[data-phase='2'] [data-node='automation'] {
+  color: #efffd1;
+  border-color: rgba(186,255,42,.7);
+  background: rgba(186,255,42,.07);
+  box-shadow: 0 0 28px rgba(186,255,42,.12);
+  transform: translateY(-3px);
+}
+
+.archNode[data-node='web'] { left: 4%; top: 42%; }
+.archNode[data-node='api'] { left: 23%; top: 42%; }
+.archNode[data-node='core'] {
+  left: 46%;
+  top: 42%;
+  border-radius: 50%;
+  width: 74px;
+  min-width: 74px;
+  height: 74px;
+  transform: translate(-50%, -19px);
+}
+.architectureVisual[data-phase='0'] [data-node='core'],
+.architectureVisual[data-phase='1'] [data-node='core'] {
+  transform: translate(-50%, -22px);
+}
+.archNode[data-node='erp'] { left: 58%; top: 42%; }
+.archNode[data-node='warehouse'] { right: 3%; top: 42%; }
+.archNode[data-node='data'] { left: 43%; top: 69%; }
+.archNode[data-node='ai'] { left: 64%; top: 69%; }
+.archNode[data-node='automation'] { right: 3%; top: 69%; }
+
+.archLine {
+  position: absolute;
+  z-index: 1;
+  height: 1px;
+  background: rgba(238,245,229,.12);
+  transform-origin: left center;
+  transition: background .35s ease, box-shadow .35s ease, opacity .35s ease;
+}
+
+.archLine[data-line='web-api'] { left: 14%; top: calc(42% + 18px); width: 9%; }
+.archLine[data-line='api-core'] { left: 33%; top: calc(42% + 18px); width: 10%; }
+.archLine[data-line='core-erp'] { left: 49%; top: calc(42% + 18px); width: 9%; }
+.archLine[data-line='erp-warehouse'] { left: 68%; top: calc(42% + 18px); width: 14%; }
+.archLine[data-line='core-data'] {
+  left: 47%;
+  top: 51%;
+  width: 18%;
+  transform: rotate(90deg);
+}
+.archLine[data-line='data-ai'] { left: 53%; top: calc(69% + 18px); width: 11%; }
+.archLine[data-line='ai-automation'] { left: 74%; top: calc(69% + 18px); width: 10%; }
+
+.architectureVisual[data-phase='0'] [data-line='web-api'],
+.architectureVisual[data-phase='0'] [data-line='api-core'],
+.architectureVisual[data-phase='1'] [data-line='core-erp'],
+.architectureVisual[data-phase='1'] [data-line='erp-warehouse'],
+.architectureVisual[data-phase='1'] [data-line='core-data'],
+.architectureVisual[data-phase='2'] [data-line='core-data'],
+.architectureVisual[data-phase='2'] [data-line='data-ai'],
+.architectureVisual[data-phase='2'] [data-line='ai-automation'] {
+  background: var(--v2-accent);
+  box-shadow: 0 0 13px rgba(186,255,42,.42);
+}
+
+.architectureStatus {
+  position: absolute;
+  z-index: 4;
+  left: 24px;
+  right: 24px;
+  bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(235,241,224,.38);
+  font: 600 9px/1 'JetBrains Mono', monospace;
+  letter-spacing: .1em;
+}
+
+.projectPreview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: min(430px, 31vw);
+  aspect-ratio: 1.35;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(.94) rotate(-1.5deg);
+  border: 1px solid rgba(186,255,42,.28);
+  background: #0a0e09;
+  box-shadow: 0 30px 100px rgba(0,0,0,.48);
+}
+
+.previewTop {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 17px;
+  border-bottom: 1px solid var(--v2-line);
+  color: rgba(239,245,231,.48);
+  font: 600 9px/1 'JetBrains Mono', monospace;
+  letter-spacing: .1em;
+}
+
+.previewMetric {
+  position: relative;
+  z-index: 4;
+  padding: 30px 24px 20px;
+  color: var(--v2-text);
+  font-size: clamp(1.4rem, 2.2vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -.05em;
+}
+
+.previewArchitecture {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 24px;
+}
+
+.previewNode {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.previewNode span {
+  display: inline-flex;
+  min-height: 29px;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid rgba(186,255,42,.28);
+  background: rgba(186,255,42,.055);
+  color: #eaffc2;
+  font: 700 8px/1 'JetBrains Mono', monospace;
+  letter-spacing: .07em;
+}
+
+.previewNode i {
+  color: var(--v2-accent);
+  font-style: normal;
+}
+
+.previewGrid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.previewGlow {
+  position: absolute;
+  right: -20%;
+  bottom: -45%;
+  width: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--v2-accent);
+  filter: blur(80px);
+  opacity: .11;
+}
+
+.projectRow {
+  color: inherit;
+}
+
+@media (max-width: 1050px) {
+  .heroStory {
+    width: 300px;
+    right: 2%;
+  }
+
+  .architectureLayout {
+    grid-template-columns: minmax(260px,.8fr) minmax(430px,1.2fr);
+    gap: 38px;
+  }
+
+  .architectureSticky {
+    min-height: 500px;
+    height: 65vh;
+  }
+
+  .archNode {
+    min-width: 68px;
+    padding-inline: 8px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 155svh;
+  }
+
+  .heroStory,
+  .heroTimeline,
+  .projectPreview {
+    display: none;
+  }
+
+  .architectureIntro {
+    margin-bottom: 42px;
+  }
+
+  .architectureLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .architectureSticky {
+    order: -1;
+    top: 76px;
+    height: 54vh;
+    min-height: 410px;
+  }
+
+  .architectureSteps {
+    padding-bottom: 0;
+  }
+
+  .architectureStep {
+    min-height: 46vh;
+  }
+
+  .architectureVisual {
+    background-size: 26px 26px, 26px 26px, auto, auto;
+  }
+
+  .archNode {
+    min-width: 56px;
+    height: 30px;
+    padding: 0 6px;
+    font-size: 7px;
+  }
+
+  .archNode[data-node='core'] {
+    width: 58px;
+    min-width: 58px;
+    height: 58px;
+    transform: translate(-50%, -14px);
+  }
+
+  .architectureVisual[data-phase='0'] [data-node='core'],
+  .architectureVisual[data-phase='1'] [data-node='core'] {
+    transform: translate(-50%, -17px);
   }
 }

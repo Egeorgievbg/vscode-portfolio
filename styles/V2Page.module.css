@@ -1,0 +1,429 @@
+.page {
+  --v2-bg: #080a08;
+  --v2-panel: #0d110d;
+  --v2-text: #f2f4ec;
+  --v2-muted: rgba(235, 241, 224, .58);
+  --v2-line: rgba(236, 244, 224, .12);
+  --v2-accent: #baff2a;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 72% 13%, rgba(186,255,42,.07), transparent 25rem),
+    linear-gradient(180deg, #080a08 0%, #060806 100%);
+  color: var(--v2-text);
+  overflow: clip;
+}
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 28px clamp(20px, 4vw, 72px) 24px;
+  border-bottom: 1px solid var(--v2-line);
+}
+
+.heroGrid {
+  width: min(1640px, 100%);
+  min-height: calc(100svh - 90px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(480px, .98fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 80px);
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 4;
+  max-width: 880px;
+}
+
+.eyebrow,
+.sectionIndex,
+.heroMeta,
+.heroBottom,
+.coreCaption {
+  font: 600 11px/1.4 'JetBrains Mono', monospace;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: rgba(239,255,205,.72);
+  margin-bottom: clamp(28px, 4vw, 58px);
+}
+
+.liveDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--v2-accent);
+  box-shadow: 0 0 0 5px rgba(186,255,42,.08), 0 0 24px rgba(186,255,42,.6);
+}
+
+.heroTitle {
+  margin: 0;
+  max-width: 900px;
+  font-size: clamp(4.4rem, 8.3vw, 9.7rem);
+  line-height: .82;
+  font-weight: 800;
+  letter-spacing: -.078em;
+  text-transform: uppercase;
+}
+
+.heroTitle span {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(242,244,236,.58);
+}
+
+.heroLead {
+  max-width: 690px;
+  margin-top: clamp(28px, 4vw, 52px);
+  color: var(--v2-muted);
+  font-size: clamp(1rem, 1.4vw, 1.24rem);
+  line-height: 1.72;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 22px;
+  border: 1px solid var(--v2-line);
+  border-radius: 999px;
+  font: 700 11px/1 'JetBrains Mono', monospace;
+  letter-spacing: .09em;
+  transition: transform .25s ease, background .25s ease, border-color .25s ease;
+}
+
+.primaryButton {
+  background: var(--v2-accent);
+  color: #0b0f07;
+  border-color: var(--v2-accent);
+}
+
+.secondaryButton {
+  background: rgba(255,255,255,.025);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-3px);
+}
+
+.secondaryButton:hover {
+  border-color: rgba(186,255,42,.52);
+  background: rgba(186,255,42,.05);
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 26px;
+  margin-top: 42px;
+  padding-top: 20px;
+  border-top: 1px solid var(--v2-line);
+  color: rgba(239,244,231,.36);
+}
+
+.coreShell {
+  position: relative;
+  z-index: 2;
+  height: min(76vh, 780px);
+  min-height: 580px;
+  isolation: isolate;
+}
+
+.coreShell::before {
+  content: '';
+  position: absolute;
+  inset: 10% 2%;
+  border: 1px solid rgba(186,255,42,.1);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 100px rgba(186,255,42,.025),
+    0 0 100px rgba(186,255,42,.03);
+  pointer-events: none;
+}
+
+.canvasLoading {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(186,255,42,.14), transparent 66%);
+  animation: v2pulse 1.6s ease-in-out infinite alternate;
+}
+
+.coreScan {
+  position: absolute;
+  inset: 8% 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 49.8%, rgba(186,255,42,.08) 50%, transparent 50.2%),
+    linear-gradient(0deg, transparent 49.8%, rgba(186,255,42,.05) 50%, transparent 50.2%);
+  mask-image: radial-gradient(circle, #000 10%, transparent 68%);
+}
+
+.coreCaption {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 8%;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(233,245,213,.42);
+}
+
+.heroBottom {
+  position: absolute;
+  left: clamp(20px, 4vw, 72px);
+  right: clamp(20px, 4vw, 72px);
+  bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(235,241,224,.32);
+}
+
+.manifesto,
+.capabilities,
+.work,
+.prototypeCta {
+  width: min(1500px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: clamp(90px, 12vw, 190px) 0;
+}
+
+.sectionIndex {
+  color: var(--v2-accent);
+}
+
+.manifesto h2,
+.sectionHeading h2,
+.prototypeCta h2 {
+  margin: 28px 0 0;
+  max-width: 1270px;
+  font-size: clamp(2.8rem, 6.4vw, 7.4rem);
+  line-height: .92;
+  letter-spacing: -.065em;
+  text-transform: uppercase;
+}
+
+.manifesto h2 span {
+  display: block;
+  color: rgba(242,244,236,.25);
+}
+
+.manifesto > p:last-child {
+  width: min(680px, 100%);
+  margin: 46px 0 0 auto;
+  color: var(--v2-muted);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.sectionHeading {
+  display: grid;
+  grid-template-columns: minmax(160px,.28fr) 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 58px;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+}
+
+.capabilityGrid {
+  border-top: 1px solid var(--v2-line);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.capability {
+  min-height: 330px;
+  padding: 26px 24px;
+  border-right: 1px solid var(--v2-line);
+  border-bottom: 1px solid var(--v2-line);
+  transition: background .3s ease, transform .3s ease;
+}
+
+.capability:first-child {
+  border-left: 1px solid var(--v2-line);
+}
+
+.capability:hover {
+  background: rgba(186,255,42,.035);
+  transform: translateY(-5px);
+}
+
+.capability > span {
+  color: var(--v2-accent);
+  font: 600 11px/1 'JetBrains Mono', monospace;
+}
+
+.capability h3 {
+  margin: 150px 0 18px;
+  font-size: clamp(1.8rem, 2.4vw, 3rem);
+  letter-spacing: -.045em;
+}
+
+.capability p {
+  color: var(--v2-muted);
+  line-height: 1.65;
+}
+
+.projectList {
+  border-top: 1px solid var(--v2-line);
+}
+
+.projectRow {
+  display: grid;
+  grid-template-columns: 70px minmax(260px,1fr) minmax(240px,.8fr) 40px;
+  gap: 20px;
+  align-items: center;
+  min-height: 130px;
+  border-bottom: 1px solid var(--v2-line);
+  transition: padding .3s ease, background .3s ease;
+}
+
+.projectRow:hover {
+  padding-left: 18px;
+  background: rgba(186,255,42,.028);
+}
+
+.projectRow > span,
+.projectRow p {
+  font: 600 10px/1.5 'JetBrains Mono', monospace;
+  letter-spacing: .08em;
+  color: rgba(236,244,224,.38);
+}
+
+.projectRow h3 {
+  font-size: clamp(1.5rem, 2.2vw, 2.8rem);
+  letter-spacing: -.04em;
+}
+
+.projectRow strong {
+  font-size: 1.5rem;
+  color: var(--v2-accent);
+}
+
+.prototypeCta {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.prototypeCta p:not(.sectionIndex) {
+  width: min(620px, 100%);
+  margin-top: 30px;
+  color: var(--v2-muted);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.prototypeCta > a {
+  width: fit-content;
+  margin-top: 34px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--v2-accent);
+  color: var(--v2-accent);
+  font: 700 12px/1 'JetBrains Mono', monospace;
+  letter-spacing: .1em;
+}
+
+@keyframes v2pulse {
+  from { opacity: .3; transform: scale(.92); }
+  to { opacity: .8; transform: scale(1.04); }
+}
+
+@media (max-width: 1050px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    padding-top: 100px;
+  }
+
+  .coreShell {
+    height: 620px;
+    min-height: 520px;
+    margin-top: -50px;
+  }
+
+  .heroBottom {
+    display: none;
+  }
+
+  .capabilityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sectionHeading {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding-inline: 18px;
+  }
+
+  .heroGrid {
+    padding-top: 74px;
+  }
+
+  .heroTitle {
+    font-size: clamp(3.65rem, 18vw, 6.2rem);
+  }
+
+  .heroMeta {
+    display: grid;
+  }
+
+  .coreShell {
+    min-height: 430px;
+    height: 58vh;
+    margin-top: -20px;
+  }
+
+  .manifes to,
+  .capabilities,
+  .work,
+  .prototypeCta {
+    width: min(100% - 36px, 1500px);
+  }
+
+  .capabilityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .capability {
+    min-height: 240px;
+    border-left: 1px solid var(--v2-line);
+  }
+
+  .capability h3 {
+    margin-top: 88px;
+  }
+
+  .projectRow {
+    grid-template-columns: 44px 1fr 30px;
+    min-height: 110px;
+  }
+
+  .projectRow p {
+    display: none;
+  }
+}

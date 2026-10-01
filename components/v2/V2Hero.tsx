@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
+import { useV2Language } from '@/components/v2/V2Language';
 import { setSystemProgress } from '@/lib/v2/systemMotion';
 import styles from '@/styles/V2Page.module.css';
 
@@ -20,6 +20,7 @@ export default function V2Hero() {
   const coreRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
   const storyRef = useRef<HTMLDivElement>(null);
+  const { copy } = useV2Language();
 
   useGSAP(
     () => {
@@ -102,39 +103,38 @@ export default function V2Hero() {
   );
 
   return (
-    <section ref={sectionRef} className={styles.hero}>
+    <section id="v2-top" ref={sectionRef} className={styles.hero}>
       <div className={styles.heroStage}>
         <div className={styles.heroGrid}>
           <div ref={copyRef} className={styles.heroCopy}>
             <div data-v2-reveal className={styles.eyebrow}>
               <span className={styles.liveDot} />
-              DIGITAL SYSTEMS / AUTOMATION / INFRASTRUCTURE
+              {copy.hero.eyebrow}
             </div>
 
             <h1 data-v2-reveal className={styles.heroTitle}>
-              DIGITAL SYSTEMS
-              <span>THAT MOVE</span>
-              BUSINESS.
+              <span>{copy.hero.line1}</span>
+              <span>{copy.hero.line2}</span>
+              <span>{copy.hero.line3}</span>
             </h1>
 
             <p data-v2-reveal className={styles.heroLead}>
-              Създавам сайтове, автоматизации и интегрирани системи, които
-              свързват web, ERP, API, AI и оперативните процеси на бизнеса.
+              {copy.hero.lead}
             </p>
 
             <div data-v2-reveal className={styles.heroActions}>
-              <Link href="/contact" className={styles.primaryButton}>
-                START A PROJECT <span>↗</span>
-              </Link>
+              <a href="#v2-cases" className={styles.primaryButton}>
+                {copy.hero.primary} <span>↓</span>
+              </a>
               <a href="#system" className={styles.secondaryButton}>
-                EXPLORE THE SYSTEM ↓
+                {copy.hero.secondary} <span>↗</span>
               </a>
             </div>
 
             <div data-v2-reveal className={styles.heroMeta}>
               <span>SOFIA / BULGARIA</span>
               <span>WEB · ERP/API · PYTHON · AI</span>
-              <span>AVAILABLE FOR SELECTED PROJECTS</span>
+              <span>{copy.hero.availability}</span>
             </div>
           </div>
 
@@ -173,8 +173,8 @@ export default function V2Hero() {
       </div>
 
       <div className={styles.heroBottom}>
-        <span>SCROLL TO DECOMPOSE THE SYSTEM</span>
-        <span>01 / 06</span>
+        <span>SCROLL / SYSTEM DECOMPOSITION</span>
+        <span>01 / 07</span>
       </div>
     </section>
   );

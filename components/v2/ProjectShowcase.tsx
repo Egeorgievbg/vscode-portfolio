@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
+import { useV2Language } from '@/components/v2/V2Language';
 import { v2CaseStudies } from '@/data/v2/caseStudies';
 import styles from '@/styles/V2Page.module.css';
 
@@ -11,6 +12,7 @@ export default function ProjectShowcase() {
   const [active, setActive] = useState(0);
   const moveX = useRef<((value: number) => void) | null>(null);
   const moveY = useRef<((value: number) => void) | null>(null);
+  const { lang, copy } = useV2Language();
 
   useGSAP(
     () => {
@@ -72,6 +74,7 @@ export default function ProjectShowcase() {
   };
 
   const current = v2CaseStudies[active];
+  const currentMetric = current.metrics[0];
 
   return (
     <section
@@ -81,8 +84,8 @@ export default function ProjectShowcase() {
       onMouseLeave={hidePreview}
     >
       <div className={styles.sectionHeading}>
-        <p className={styles.sectionIndex}>05 / SELECTED SYSTEMS</p>
-        <h2>BUILT FOR REAL OPERATIONS.</h2>
+        <p className={styles.sectionIndex}>{copy.projects.label}</p>
+        <h2>{copy.projects.title}</h2>
       </div>
 
       <div className={styles.projectList}>
@@ -109,7 +112,8 @@ export default function ProjectShowcase() {
           <span>{current.status}</span>
         </div>
         <div className={styles.previewMetric}>
-          {current.metrics[0]?.value} {current.metrics[0]?.label}
+          <strong>{currentMetric?.value}</strong>
+          <span>{currentMetric?.label[lang]}</span>
         </div>
         <div className={styles.previewArchitecture}>
           {current.architecture.map((item, index) => (

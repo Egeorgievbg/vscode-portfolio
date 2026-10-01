@@ -46,6 +46,8 @@ export default function CaseStudyShowcase() {
         const visual = caseEl.querySelector('[data-case-visual]');
         const metrics = caseEl.querySelectorAll('[data-case-metric]');
 
+        if (!copy || !visual) return;
+
         gsap.from(copy, {
           y: 52,
           opacity: 0,
@@ -100,6 +102,7 @@ export default function CaseStudyShowcase() {
         {v2CaseStudies.map((item, caseIndex) => (
           <article
             key={item.slug}
+            id={`case-${item.slug}`}
             data-case-study
             className={styles.caseStudy}
             data-reverse={caseIndex % 2 === 1}

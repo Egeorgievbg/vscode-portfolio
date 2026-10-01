@@ -1,4 +1,4 @@
-import { Environment, PerformanceMonitor } from '@react-three/drei';
+import { Environment, Lightformer, PerformanceMonitor } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useMemo, useState } from 'react';
 
@@ -56,7 +56,22 @@ export default function SystemCanvas() {
       <SystemCore quality={quality} />
 
       {quality.mode === 'high' && (
-        <Environment preset="city" environmentIntensity={0.24} />
+        <Environment resolution={64}>
+          <Lightformer
+            form="rect"
+            intensity={1.8}
+            color="#eaffbd"
+            position={[0, 4, 5]}
+            scale={[8, 2, 1]}
+          />
+          <Lightformer
+            form="ring"
+            intensity={1.2}
+            color="#9dff00"
+            position={[-4, -2, 2]}
+            scale={3}
+          />
+        </Environment>
       )}
     </Canvas>
   );

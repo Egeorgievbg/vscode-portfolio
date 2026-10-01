@@ -2,46 +2,8 @@ import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
+import { v2CaseStudies } from '@/data/v2/caseStudies';
 import styles from '@/styles/V2Page.module.css';
-
-type ProjectItem = {
-  index: string;
-  title: string;
-  meta: string;
-  metric: string;
-  architecture: string[];
-};
-
-const PROJECTS: ProjectItem[] = [
-  {
-    index: '01',
-    title: 'ENTERPRISE B2B COMMERCE',
-    meta: 'PIM / ERP / PRODUCT DATA / SCALE',
-    metric: '50K+ PRODUCTS',
-    architecture: ['PIM', 'ERP', 'API', 'B2B'],
-  },
-  {
-    index: '02',
-    title: 'ERP PRICING BRIDGE',
-    meta: 'PYTHON / API / CONCURRENCY / BUSINESS LOGIC',
-    metric: 'REAL-TIME PRICING',
-    architecture: ['SHOP', 'QUEUE', 'ERP', 'PRICE'],
-  },
-  {
-    index: '03',
-    title: 'REVITA SALES OS',
-    meta: 'FIELD SALES / CRM / DATA / AI',
-    metric: 'FIELD OPERATIONS',
-    architecture: ['CRM', 'ROUTES', 'DATA', 'AI'],
-  },
-  {
-    index: '04',
-    title: 'GPTSBOXES',
-    meta: 'THREE.JS / CONFIGURATOR / COMMERCE',
-    metric: '3D PRODUCT ENGINE',
-    architecture: ['3D', 'ARTWORK', 'QUOTE', 'ORDER'],
-  },
-];
 
 export default function ProjectShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -109,7 +71,7 @@ export default function ProjectShowcase() {
     moveY.current?.(event.clientY - 170);
   };
 
-  const current = PROJECTS[active];
+  const current = v2CaseStudies[active];
 
   return (
     <section
@@ -124,19 +86,19 @@ export default function ProjectShowcase() {
       </div>
 
       <div className={styles.projectList}>
-        {PROJECTS.map((project, index) => (
+        {v2CaseStudies.map((project, index) => (
           <a
-            key={project.title}
+            key={project.slug}
             data-project-row
             className={styles.projectRow}
-            href="/projects"
+            href={`#case-${project.slug}`}
             onMouseEnter={() => showPreview(index)}
             onFocus={() => setActive(index)}
           >
             <span>{project.index}</span>
             <h3>{project.title}</h3>
-            <p>{project.meta}</p>
-            <strong>↗</strong>
+            <p>{project.eyebrow}</p>
+            <strong>↘</strong>
           </a>
         ))}
       </div>
@@ -144,9 +106,11 @@ export default function ProjectShowcase() {
       <div ref={previewRef} className={styles.projectPreview} aria-hidden="true">
         <div className={styles.previewTop}>
           <span>{current.index} / SYSTEM</span>
-          <span>LIVE CASE</span>
+          <span>{current.status}</span>
         </div>
-        <div className={styles.previewMetric}>{current.metric}</div>
+        <div className={styles.previewMetric}>
+          {current.metrics[0]?.value} {current.metrics[0]?.label}
+        </div>
         <div className={styles.previewArchitecture}>
           {current.architecture.map((item, index) => (
             <div key={item} className={styles.previewNode}>

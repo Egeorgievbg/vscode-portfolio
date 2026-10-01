@@ -1,5 +1,7 @@
 import type { GetStaticProps } from 'next';
 
+import ArchitectureStory from '@/components/v2/ArchitectureStory';
+import ProjectShowcase from '@/components/v2/ProjectShowcase';
 import SmoothScroll from '@/components/v2/SmoothScroll';
 import V2Hero from '@/components/v2/V2Hero';
 import styles from '@/styles/V2Page.module.css';
@@ -27,13 +29,6 @@ const capabilities = [
   },
 ];
 
-const projects = [
-  ['ENTERPRISE B2B COMMERCE', 'PIM / ERP / PRODUCT DATA / SCALE'],
-  ['ERP PRICING BRIDGE', 'PYTHON / API / CONCURRENCY / BUSINESS LOGIC'],
-  ['REVITA SALES OS', 'FIELD SALES / CRM / DATA / AI'],
-  ['GPTSBOXES', 'THREE.JS / PRODUCT CONFIGURATOR / COMMERCE'],
-];
-
 export default function V2PrototypePage() {
   return (
     <main className={styles.page}>
@@ -53,9 +48,11 @@ export default function V2PrototypePage() {
         </p>
       </section>
 
+      <ArchitectureStory />
+
       <section className={styles.capabilities}>
         <div className={styles.sectionHeading}>
-          <p className={styles.sectionIndex}>03 / CAPABILITIES</p>
+          <p className={styles.sectionIndex}>04 / CAPABILITIES</p>
           <h2>FROM FRAGMENTED TO CONNECTED.</h2>
         </div>
 
@@ -70,30 +67,14 @@ export default function V2PrototypePage() {
         </div>
       </section>
 
-      <section className={styles.work}>
-        <div className={styles.sectionHeading}>
-          <p className={styles.sectionIndex}>04 / SELECTED SYSTEMS</p>
-          <h2>BUILT FOR REAL OPERATIONS.</h2>
-        </div>
-
-        <div className={styles.projectList}>
-          {projects.map(([title, meta], index) => (
-            <div key={title} className={styles.projectRow}>
-              <span>0{index + 1}</span>
-              <h3>{title}</h3>
-              <p>{meta}</p>
-              <strong>↗</strong>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ProjectShowcase />
 
       <section className={styles.prototypeCta}>
-        <p className={styles.sectionIndex}>05 / NEXT</p>
+        <p className={styles.sectionIndex}>06 / NEXT</p>
         <h2>LET&apos;S BUILD THE SYSTEM.</h2>
         <p>
-          Това е първият технически прототип на новия визуален език — без
-          промяна по production сайта.
+          Следващата версия ще замени prototype данните с реалните case studies,
+          screenshots и измерими резултати от production проектите.
         </p>
         <a href="/contact">START A PROJECT ↗</a>
       </section>

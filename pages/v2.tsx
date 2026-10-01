@@ -1,6 +1,7 @@
 import type { GetStaticProps } from 'next';
 
 import ArchitectureStory from '@/components/v2/ArchitectureStory';
+import CaseStudyShowcase from '@/components/v2/CaseStudyShowcase';
 import ProjectShowcase from '@/components/v2/ProjectShowcase';
 import SmoothScroll from '@/components/v2/SmoothScroll';
 import V2Hero from '@/components/v2/V2Hero';
@@ -68,13 +69,14 @@ export default function V2PrototypePage() {
       </section>
 
       <ProjectShowcase />
+      <CaseStudyShowcase />
 
       <section className={styles.prototypeCta}>
-        <p className={styles.sectionIndex}>06 / NEXT</p>
+        <p className={styles.sectionIndex}>07 / NEXT</p>
         <h2>LET&apos;S BUILD THE SYSTEM.</h2>
         <p>
-          Следващата версия ще замени prototype данните с реалните case studies,
-          screenshots и измерими резултати от production проектите.
+          Следващата версия ще добави реални screenshot assets, detail routes и
+          production preview QA върху вече свързаните case-study данни.
         </p>
         <a href="/contact">START A PROJECT ↗</a>
       </section>

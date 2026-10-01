@@ -3,31 +3,15 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
+import { useV2Language } from '@/components/v2/V2Language';
 import styles from '@/styles/V2Page.module.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const STEPS = [
-  {
-    index: '01',
-    title: 'CONNECT THE FRONT.',
-    body: 'Website, commerce and customer touchpoints feed one shared operational layer instead of becoming isolated tools.',
-  },
-  {
-    index: '02',
-    title: 'MOVE BUSINESS LOGIC.',
-    body: 'ERP, pricing, product data and internal APIs become explicit system components with predictable data flow.',
-  },
-  {
-    index: '03',
-    title: 'AUTOMATE THE OPERATIONS.',
-    body: 'Python, AI and workflow automation remove repetitive manual work and create traceable execution paths.',
-  },
-];
-
 export default function ArchitectureStory() {
   const rootRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const { copy } = useV2Language();
 
   useGSAP(
     () => {
@@ -46,39 +30,51 @@ export default function ArchitectureStory() {
         });
       });
 
-      gsap.from(root.querySelector('[data-arch-visual]'), {
-        opacity: 0,
-        scale: 0.94,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: root,
-          start: 'top 76%',
-        },
-      });
+      const visual = root.querySelector('[data-arch-visual]');
+      if (visual) {
+        gsap.from(visual, {
+          opacity: 0,
+          scale: 0.94,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: root,
+            start: 'top 76%',
+          },
+        });
+      }
     },
     { scope: rootRef },
   );
 
+  const phase = copy.architecture.steps[active]?.phase || 'SYSTEM';
+
   return (
-    <section ref={rootRef} className={styles.architectureStory}>
+    <section id="system" ref={rootRef} className={styles.architectureStory}>
       <div className={styles.architectureIntro}>
-        <p className={styles.sectionIndex}>03 / SYSTEM ARCHITECTURE</p>
-        <h2>FROM TOOLS TO ONE OPERATING SYSTEM.</h2>
+        <p className={styles.sectionIndex}>{copy.architecture.label}</p>
+        <h2>{copy.architecture.title}</h2>
       </div>
 
       <div className={styles.architectureLayout}>
         <div className={styles.architectureSteps}>
-          {STEPS.map((step, index) => (
+          {copy.architecture.steps.map((step, index) => (
             <article
-              key={step.index}
+              key={step.title}
               data-arch-step
               className={styles.architectureStep}
               data-active={index === active}
+              tabIndex={0}
+              onFocus={() => setActive(index)}
+              onClick={() => setActive(index)}
             >
-              <span>{step.index}</span>
+              <div className={styles.architectureStepTop}>
+                <span>0{index + 1}</span>
+                <b>{step.phase}</b>
+              </div>
               <h3>{step.title}</h3>
               <p>{step.body}</p>
+              <i className={styles.architectureStepLine} aria-hidden="true" />
             </article>
           ))}
         </div>
@@ -90,6 +86,8 @@ export default function ArchitectureStory() {
             data-phase={active}
             aria-label="System architecture map"
           >
+            <div className={styles.architectureOrb} aria-hidden="true" />
+
             <div className={styles.archNode} data-node="web">WEB</div>
             <div className={styles.archNode} data-node="api">API</div>
             <div className={styles.archNode} data-node="core">CORE</div>
@@ -109,7 +107,7 @@ export default function ArchitectureStory() {
 
             <div className={styles.architectureStatus}>
               <span>PHASE 0{active + 1}</span>
-              <span>{active === 0 ? 'FRONT LAYER' : active === 1 ? 'BUSINESS LOGIC' : 'AUTOMATION'}</span>
+              <span>{phase}</span>
             </div>
           </div>
         </div>

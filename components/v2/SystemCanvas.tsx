@@ -2,6 +2,7 @@ import { Environment, PerformanceMonitor } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useMemo, useState } from 'react';
 
+import CameraRig from '@/components/v2/CameraRig';
 import SystemCore from '@/components/v2/SystemCore';
 import { degradeQuality, getDeviceQuality } from '@/lib/v2/deviceQuality';
 
@@ -41,9 +42,16 @@ export default function SystemCanvas() {
         onDecline={() => setQuality((current) => degradeQuality(current))}
       />
 
+      <CameraRig />
+
       <ambientLight intensity={0.42} />
       <directionalLight position={[5, 5, 6]} intensity={1.35} color="#f3ffd6" />
-      <pointLight position={[-4, -2, 4]} intensity={18} color="#9dff00" distance={11} />
+      <pointLight
+        position={[-4, -2, 4]}
+        intensity={18}
+        color="#9dff00"
+        distance={11}
+      />
 
       <SystemCore quality={quality} />
 

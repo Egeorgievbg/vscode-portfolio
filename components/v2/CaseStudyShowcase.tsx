@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
+import { useV2Language } from '@/components/v2/V2Language';
 import { v2CaseStudies } from '@/data/v2/caseStudies';
 import styles from '@/styles/V2Page.module.css';
 
@@ -31,6 +32,7 @@ function SystemDiagram({ nodes }: { nodes: string[] }) {
 
 export default function CaseStudyShowcase() {
   const rootRef = useRef<HTMLElement>(null);
+  const { lang, copy } = useV2Language();
 
   useGSAP(
     () => {
@@ -42,13 +44,13 @@ export default function CaseStudyShowcase() {
       );
 
       cases.forEach((caseEl) => {
-        const copy = caseEl.querySelector('[data-case-copy]');
+        const caseCopy = caseEl.querySelector('[data-case-copy]');
         const visual = caseEl.querySelector('[data-case-visual]');
         const metrics = caseEl.querySelectorAll('[data-case-metric]');
 
-        if (!copy || !visual) return;
+        if (!caseCopy || !visual) return;
 
-        gsap.from(copy, {
+        gsap.from(caseCopy, {
           y: 52,
           opacity: 0,
           duration: 0.9,
@@ -88,89 +90,90 @@ export default function CaseStudyShowcase() {
   );
 
   return (
-    <section ref={rootRef} className={styles.caseStudies}>
+    <section id="v2-cases" ref={rootRef} className={styles.caseStudies}>
       <div className={styles.caseStudiesHeader}>
-        <p className={styles.sectionIndex}>06 / CASE STUDIES</p>
-        <h2>ARCHITECTURE WITH CONSEQUENCES.</h2>
-        <p>
-          Не показвам „технологии заради технологиите“. Всеки проект е организиран
-          около конкретен operational problem, ясни contracts и проверими граници.
-        </p>
+        <p className={styles.sectionIndex}>{copy.cases.label}</p>
+        <h2>{copy.cases.title}</h2>
+        <p>{copy.cases.intro}</p>
       </div>
 
       <div className={styles.caseStudyList}>
-        {v2CaseStudies.map((item, caseIndex) => (
-          <article
-            key={item.slug}
-            id={`case-${item.slug}`}
-            data-case-study
-            className={styles.caseStudy}
-            data-reverse={caseIndex % 2 === 1}
-          >
-            <div data-case-copy className={styles.caseCopy}>
-              <div className={styles.caseTopline}>
-                <span>{item.index}</span>
-                <span>{item.eyebrow}</span>
-                <span>{item.status}</span>
-              </div>
+        {v2CaseStudies.map((item, caseIndex) => {
+          const localized = item.copy[lang];
 
-              <h3>{item.title}</h3>
-              <p className={styles.caseSummary}>{item.summary}</p>
-
-              <div className={styles.caseNarrative}>
-                <div>
-                  <span>CHALLENGE</span>
-                  <p>{item.challenge}</p>
+          return (
+            <article
+              key={item.slug}
+              id={`case-${item.slug}`}
+              data-case-study
+              className={styles.caseStudy}
+              data-reverse={caseIndex % 2 === 1}
+            >
+              <div data-case-copy className={styles.caseCopy}>
+                <div className={styles.caseTopline}>
+                  <span>{item.index}</span>
+                  <span>{item.eyebrow}</span>
+                  <span>{item.status}</span>
                 </div>
-                <div>
-                  <span>SYSTEM</span>
-                  <p>{item.solution}</p>
-                </div>
-                <div>
-                  <span>OUTCOME</span>
-                  <p>{item.outcome}</p>
-                </div>
-              </div>
 
-              <div className={styles.caseStack}>
-                {item.stack.map((technology) => (
-                  <span key={technology}>{technology}</span>
-                ))}
-              </div>
+                <h3>{item.title}</h3>
+                <p className={styles.caseSummary}>{localized.summary}</p>
 
-              <div className={styles.caseLinks}>
-                {item.liveUrl && (
-                  <a href={item.liveUrl} target="_blank" rel="noopener noreferrer">
-                    LIVE SYSTEM ↗
-                  </a>
-                )}
-                {item.repositoryUrl && (
-                  <a href={item.repositoryUrl} target="_blank" rel="noopener noreferrer">
-                    SOURCE ↗
-                  </a>
-                )}
-              </div>
-            </div>
-
-            <div data-case-visual className={styles.caseVisual}>
-              <SystemDiagram nodes={item.architecture} />
-
-              <div className={styles.caseMetrics}>
-                {item.metrics.map((metric) => (
-                  <div
-                    key={metric.label}
-                    data-case-metric
-                    className={styles.caseMetric}
-                  >
-                    <strong>{metric.value}</strong>
-                    <span>{metric.label}</span>
-                    {metric.note && <small>{metric.note}</small>}
+                <div className={styles.caseNarrative}>
+                  <div>
+                    <span>{copy.cases.challenge}</span>
+                    <p>{localized.challenge}</p>
                   </div>
-                ))}
+                  <div>
+                    <span>{copy.cases.system}</span>
+                    <p>{localized.solution}</p>
+                  </div>
+                  <div>
+                    <span>{copy.cases.outcome}</span>
+                    <p>{localized.outcome}</p>
+                  </div>
+                </div>
+
+                <div className={styles.caseStack}>
+                  {item.stack.map((technology) => (
+                    <span key={technology}>{technology}</span>
+                  ))}
+                </div>
+
+                <div className={styles.caseLinks}>
+                  {item.liveUrl && (
+                    <a href={item.liveUrl} target="_blank" rel="noopener noreferrer">
+                      {copy.cases.live} ↗
+                    </a>
+                  )}
+                  {item.repositoryUrl && (
+                    <a href={item.repositoryUrl} target="_blank" rel="noopener noreferrer">
+                      {copy.cases.source} ↗
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+
+              <div data-case-visual className={styles.caseVisual}>
+                <SystemDiagram nodes={item.architecture} />
+
+                <div className={styles.caseMetrics}>
+                  {item.metrics.map((metric) => (
+                    <div
+                      key={metric.value + metric.label.en}
+                      data-case-metric
+                      className={styles.caseMetric}
+                    >
+                      <strong>{metric.value}</strong>
+                      <span>{metric.label[lang]}</span>
+                      {metric.note && <small>{metric.note[lang]}</small>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

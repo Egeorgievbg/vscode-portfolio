@@ -117,8 +117,8 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: 'stg.ezd.bf',
-    slug: 'stg-ezd-bf',
+    title: 'stg.ezd.bg',
+    slug: 'stg-ezd-bg',
     category: 'Клиентски уеб проект',
     industry: 'Web development',
     status: 'Завършен',
@@ -130,7 +130,7 @@ export const projects: Project[] = [
     technologies: ['Web Development', 'Project Delivery'],
     results: ['реализиран платен проект', 'професионално предаване', 'доказан delivery'],
     logo: '/logos/vsc.svg',
-    link: 'https://stg.ezd.bf',
+    link: 'https://stg.ezd.bg',
   },
   {
     title: 'ERP Pricing Bridge',

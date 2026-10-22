@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import Explorer from '@/components/Explorer';
 import Bottombar from '@/components/Bottombar';
 import Tabsbar from '@/components/Tabsbar';
+import SiteFooter from '@/components/SiteFooter';
 
 import styles from '@/styles/Layout.module.css';
 
@@ -14,25 +15,25 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  // set scroll to top of main content on url pathname change
   const router = useRouter();
+
   useEffect(() => {
     const main = document.getElementById('main-editor');
-    if (main) {
-      main.scrollTop = 0;
-    }
+    if (main) main.scrollTop = 0;
   }, [router.pathname]);
 
   return (
     <>
+      <a className={styles.skipLink} href="#main-editor">Към основното съдържание</a>
       <Titlebar />
       <div className={styles.main}>
         <Sidebar />
         <Explorer />
-        <div style={{ width: '100%' }}>
+        <div className={styles.editor}>
           <Tabsbar />
-          <main id="main-editor" className={styles.content}>
+          <main id="main-editor" className={styles.content} tabIndex={-1}>
             {children}
+            <SiteFooter />
           </main>
         </div>
       </div>

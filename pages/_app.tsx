@@ -12,6 +12,7 @@ interface PortfolioPageProps {
   description?: string;
   canonical?: string;
   noindex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
   [key: string]: unknown;
 }
 
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps<PortfolioPageProps>) {
         description={pageProps.description}
         canonical={pageProps.canonical}
         noindex={pageProps.noindex}
+        schema={pageProps.schema}
       />
       <Component {...pageProps} />
     </Layout>

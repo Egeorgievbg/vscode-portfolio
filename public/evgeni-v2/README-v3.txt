@@ -1,1 +1,0 @@
-Staging marker for portfolio v3 SEO/AI release. Generated 2026-09-11.

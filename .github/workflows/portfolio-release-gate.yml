@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - fix/portfolio-release-2026-10-22
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read

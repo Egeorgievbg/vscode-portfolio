@@ -32,7 +32,7 @@ const ServicesPage = () => {
 };
 
 export async function getStaticProps() {
-  return { props: { title: 'Услуги' } };
+  return { props: { title: 'Услуги', description: 'Business Website, Growth Website, Automation Sprint, Monthly Digital Partner и AI Marketing Launch — услуги с ясен обхват, QA и handover.', canonical: 'https://evgeni-georgiev.com/services' } };
 }
 
 export default ServicesPage;

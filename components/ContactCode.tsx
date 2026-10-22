@@ -19,18 +19,19 @@ const contactItems = [
   {
     social: 'service',
     link: 'Business Website',
-    href: '/services',
+    href: '/services/business-website',
   },
   {
     social: 'service',
     link: 'Automation Sprint',
-    href: '/services',
+    href: '/services/automation-sprint',
   },
   {
     social: 'service',
     link: 'Monthly Digital Partner',
-    href: '/services',
+    href: '/services/monthly-digital-partner',
   },
+  { social: 'tool', link: 'Project Brief Builder', href: '/tools/project-brief' },
 ];
 
 const ContactCode = () => {

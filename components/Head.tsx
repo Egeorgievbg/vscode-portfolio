@@ -1,43 +1,64 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+type JsonLd = Record<string, unknown>;
+
 interface CustomHeadProps {
   title: string;
   description?: string;
   canonical?: string;
   noindex?: boolean;
+  schema?: JsonLd | JsonLd[];
 }
+
+const SITE_URL = 'https://evgeni-georgiev.com';
 
 const CustomHead = ({
   title,
   description = 'Евгени Георгиев изгражда бизнес сайтове, e-commerce структури, Python автоматизации, ERP/API интеграции и дигитални процеси за малък и среден бизнес.',
   canonical,
   noindex = false,
+  schema,
 }: CustomHeadProps) => {
   const router = useRouter();
-  const canonicalUrl =
-    canonical || `https://evgeni-georgiev.com${router.asPath.split('?')[0]}`;
+  const path = router.asPath.split('?')[0].split('#')[0] || '/';
+  const canonicalUrl = canonical || `${SITE_URL}${path}`;
 
-  const structuredData = {
+  const baseGraph: JsonLd[] = [
+    {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: 'Евгени Георгиев',
+      url: SITE_URL,
+      email: 'mailto:dev@evgeni-georgiev.com',
+      sameAs: ['https://github.com/Egeorgievbg'],
+      jobTitle: 'Web Developer, Automation Specialist and Digital Project Partner',
+      description,
+      knowsAbout: [
+        'Web Development',
+        'Python Automation',
+        'ERP Integrations',
+        'API Integrations',
+        'E-commerce',
+        'Technical SEO',
+        'CRO',
+        'Digital Project Management',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: 'Евгени Георгиев — Digital Project Partner',
+      inLanguage: 'bg-BG',
+      publisher: { '@id': `${SITE_URL}/#person` },
+    },
+  ];
+
+  const extraSchema = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+  const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': ['Person', 'ProfessionalService'],
-    name: 'Евгени Георгиев',
-    url: 'https://evgeni-georgiev.com',
-    email: 'mailto:dev@evgeni-georgiev.com',
-    sameAs: ['https://github.com/Egeorgievbg'],
-    jobTitle: 'Web Developer, Python Automation Specialist and Digital Project Partner',
-    description,
-    areaServed: 'Bulgaria',
-    knowsAbout: [
-      'Web Development',
-      'Python Automation',
-      'ERP Integrations',
-      'API Integrations',
-      'E-commerce',
-      'SEO',
-      'CRO',
-      'Digital Project Management',
-    ],
+    '@graph': [...baseGraph, ...extraSchema],
   };
 
   return (
@@ -45,21 +66,32 @@ const CustomHead = ({
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta
-        name="keywords"
-        content="Евгени Георгиев, изработка на сайт, Python автоматизация, ERP интеграции, API интеграции, дигитален проектен партньор, SEO, CRO, e-commerce"
+        name="robots"
+        content={
+          noindex
+            ? 'noindex,follow'
+            : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+        }
       />
+      <meta name="theme-color" content="#05070b" />
       <link rel="canonical" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="bg-BG" href={canonicalUrl} />
+
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Евгени Георгиев" />
-      <meta name="twitter:card" content="summary_large_image" />
-      {noindex && <meta name="robots" content="noindex,follow" />}
+      <meta property="og:locale" content="bg_BG" />
+
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+
       {!noindex && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
     </Head>

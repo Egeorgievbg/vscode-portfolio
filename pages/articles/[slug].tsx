@@ -51,6 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       description: article.description,
       canonical: `https://evgeni-georgiev.com/articles/${article.slug}`,
       article,
+      schema: { '@type': 'Article', headline: article.title, description: article.description, inLanguage: 'bg-BG', mainEntityOfPage: `https://evgeni-georgiev.com/articles/${article.slug}`, author: { '@id': 'https://evgeni-georgiev.com/#person' } },
     },
   };
 };

@@ -67,6 +67,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       description: project.description,
       canonical: `https://evgeni-georgiev.com/projects/${project.slug}`,
       project,
+      schema: { '@type': 'CreativeWork', name: project.title, description: project.description, url: `https://evgeni-georgiev.com/projects/${project.slug}`, creator: { '@id': 'https://evgeni-georgiev.com/#person' }, keywords: project.technologies.join(', ') },
     },
   };
 };

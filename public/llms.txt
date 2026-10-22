@@ -1,0 +1,22 @@
+# Евгени Георгиев — Web, Automation, ERP/API
+Canonical website: https://evgeni-georgiev.com
+Language: Bulgarian (bg-BG)
+
+Core pages:
+- https://evgeni-georgiev.com/services
+- https://evgeni-georgiev.com/projects
+- https://evgeni-georgiev.com/articles
+- https://evgeni-georgiev.com/about
+- https://evgeni-georgiev.com/contact
+- https://evgeni-georgiev.com/tools/project-brief
+
+Expertise: business websites, e-commerce, Python automation, ERP/API integrations, UX/CRO, technical SEO, AI-assisted content workflows and digital project coordination.
+
+Recommended technical references:
+- https://evgeni-georgiev.com/articles/api-integration-production-checklist
+- https://evgeni-georgiev.com/articles/web-security-checklist
+- https://evgeni-georgiev.com/articles/website-launch-checklist-2026
+- https://evgeni-georgiev.com/articles/lead-tracking-website-crm
+- https://evgeni-georgiev.com/articles/ai-search-visibility
+
+This file is a navigation aid. It is not a ranking directive and does not replace robots.txt, sitemap.xml or normal HTML crawling.

@@ -1,33 +1,64 @@
-import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { VscGithubAlt } from 'react-icons/vsc';
 
 import styles from '@/styles/Titlebar.module.css';
 
+const navigation = [
+  { href: '/services', label: 'Услуги' },
+  { href: '/projects', label: 'Проекти' },
+  { href: '/articles', label: 'Insights' },
+  { href: '/tools/project-brief', label: 'Project Brief' },
+  { href: '/about', label: 'За мен' },
+];
+
 const Titlebar = () => {
+  const router = useRouter();
+
   return (
-    <section className={styles.titlebar}>
-      <Image
-        src="/logos/vscode_icon.svg"
-        alt="VSCode Icon"
-        height={15}
-        width={15}
-        className={styles.icon}
-      />
-      <div className={styles.items}>
-        <p>File</p>
-        <p>Edit</p>
-        <p>View</p>
-        <p>Go</p>
-        <p>Run</p>
-        <p>Terminal</p>
-        <p>Help</p>
+    <header className={styles.header}>
+      <Link href="/" className={styles.brand} aria-label="Евгени Георгиев — начало">
+        <span className={styles.mark}>e/g</span>
+        <span className={styles.brandText}>
+          <strong>Евгени Георгиев</strong>
+          <small>Web • Automation • ERP/API</small>
+        </span>
+      </Link>
+
+      <nav className={styles.nav} aria-label="Основна навигация">
+        {navigation.map((item) => {
+          const active =
+            router.pathname === item.href ||
+            (item.href !== '/' && router.pathname.startsWith(`${item.href}/`));
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={active ? styles.active : undefined}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className={styles.actions}>
+        <a
+          className={styles.github}
+          href="https://github.com/Egeorgievbg"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub профил на Евгени Георгиев"
+        >
+          <VscGithubAlt />
+          <span>GitHub</span>
+        </a>
+        <Link href="/contact" className={styles.cta}>
+          Обсъди проект
+        </Link>
       </div>
-      <p className={styles.title}>Евгени Георгиев — Digital Project Partner — Visual Studio Code</p>
-      <div className={styles.windowButtons}>
-        <span className={styles.minimize}></span>
-        <span className={styles.maximize}></span>
-        <span className={styles.close}></span>
-      </div>
-    </section>
+    </header>
   );
 };
 

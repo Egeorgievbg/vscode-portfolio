@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { VscCheck, VscCommentDiscussion, VscRocket } from 'react-icons/vsc';
 import ContactCode from '@/components/ContactCode';
 import styles from '@/styles/ContactPage.module.css';
@@ -27,6 +28,7 @@ const ContactPage = () => {
             <li><span>03</span><div><strong>Изпълнение</strong><p>Работим по ясни етапи с видим напредък и контрол.</p></div></li>
           </ol>
           <div className={styles.promise}><VscCheck /> Отговор с конкретна следваща стъпка.</div>
+          <p style={{ marginTop: '1rem', lineHeight: 1.6 }}>Не си сигурен как да опишеш задачата? <Link href="/tools/project-brief">Подготви Project Brief →</Link></p>
         </aside>
       </div>
     </div>
@@ -34,7 +36,7 @@ const ContactPage = () => {
 };
 
 export async function getStaticProps() {
-  return { props: { title: 'Контакт' } };
+  return { props: { title: 'Контакт', description: 'Контакт с Евгени Георгиев за бизнес сайт, e-commerce, Python автоматизация, ERP/API интеграция или техническа координация.', canonical: 'https://evgeni-georgiev.com/contact' } };
 }
 
 export default ContactPage;

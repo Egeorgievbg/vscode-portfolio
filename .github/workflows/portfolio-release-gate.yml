@@ -1,0 +1,35 @@
+name: Portfolio Release Gate
+
+on:
+  push:
+    branches:
+      - fix/portfolio-release-2026-10-22
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Runner diagnostics
+        run: |
+          node --version
+          npm --version
+          git --version
+
+      - name: Fetch source
+        run: |
+          git clone --depth 1 --branch "fix/portfolio-release-2026-10-22" https://github.com/Egeorgievbg/vscode-portfolio.git app
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm install --no-audit --no-fund
+
+      - name: Verify content, routes, lint, types and production build
+        working-directory: app
+        run: npm run verify

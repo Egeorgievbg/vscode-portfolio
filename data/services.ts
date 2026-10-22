@@ -12,7 +12,7 @@ export const services: Service[] = [
   {
     title: 'Business Website',
     slug: 'business-website',
-    price: 'от 1 200 €',
+    price: 'Scope след discovery',
     summary:
       'Професионален сайт за малък и среден бизнес с ясна структура, мобилна версия, SEO основа и подготовка за реклама.',
     forWho:
@@ -31,7 +31,7 @@ export const services: Service[] = [
   {
     title: 'Growth Website',
     slug: 'growth-website',
-    price: 'от 2 500 €',
+    price: 'Scope след audit',
     summary:
       'Сайт или редизайн с фокус върху конверсии, tracking, landing секции и рекламна готовност.',
     forWho:
@@ -49,7 +49,7 @@ export const services: Service[] = [
   {
     title: 'Automation Sprint',
     slug: 'automation-sprint',
-    price: 'от 800 €',
+    price: 'Scope по процес',
     summary:
       'Автоматизация на ръчни процеси чрез Python, API, CSV/Excel workflows и вътрешни инструменти.',
     forWho:
@@ -67,7 +67,7 @@ export const services: Service[] = [
   {
     title: 'Monthly Digital Partner',
     slug: 'monthly-digital-partner',
-    price: 'от 400 € / месец',
+    price: 'Месечен scope',
     summary:
       'Месечна дигитална поддръжка за сайт, съдържание, технически задачи, SEO, кампании и координация.',
     forWho:
@@ -85,7 +85,7 @@ export const services: Service[] = [
   {
     title: 'AI Marketing Launch',
     slug: 'ai-marketing-launch',
-    price: 'от 250 €',
+    price: 'Scope + human QA',
     summary:
       'Пакет за рекламни послания, landing текстове, продуктови описания и AI визуални концепции.',
     forWho: 'Малки бизнеси, които искат бързо да стартират оферта, продукт или кампания.',

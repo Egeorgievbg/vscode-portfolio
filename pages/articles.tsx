@@ -6,9 +6,9 @@ import styles from '@/styles/ProjectsPage.module.css';
 const ArticlesPage = () => {
   return (
     <div className={styles.layout}>
-      <h1 className={styles.pageTitle}>Практически знания за сайтове, AI и автоматизации.</h1>
+      <h1 className={styles.pageTitle}>Практически знания за сайтове, AI, SEO и автоматизации.</h1>
       <p className={styles.pageSubtitle}>
-        Съдържание, изградено върху реални бизнес проблеми, технически решения и конкретни стъпки за растеж.
+        Работни checklists, integration patterns и решения за реални бизнес задачи — без общи AI текстове.
       </p>
       <div className={styles.container}>
         {articles.map((article) => (
@@ -30,7 +30,7 @@ const ArticlesPage = () => {
 };
 
 export async function getStaticProps() {
-  return { props: { title: 'Блог' } };
+  return { props: { title: 'Insights', description: 'Практически ръководства за web development, e-commerce CRO, Python automation, ERP/API, analytics, security и AI workflows.', canonical: 'https://evgeni-georgiev.com/articles' } };
 }
 
 export default ArticlesPage;

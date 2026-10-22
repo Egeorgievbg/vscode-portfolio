@@ -9,6 +9,7 @@ import {
   VscTerminal,
 } from 'react-icons/vsc';
 
+import { articles } from '@/data/articles';
 import styles from '@/styles/HomePage.module.css';
 
 const capabilities = [
@@ -21,7 +22,7 @@ const capabilities = [
 ];
 
 const proof = [
-  { value: '10+', label: 'реални проекта' },
+  { value: '10+', label: 'проекта и proof-of-work' },
   { value: '5', label: 'пакетирани услуги' },
   { value: 'B2B', label: 'технически фокус' },
 ];
@@ -108,6 +109,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className={styles.insights}>
+        <div className={styles.sectionHeading}>
+          <span>02 / KNOWLEDGE HUB</span>
+          <h2>Практически ръководства за решения, които трябва да работят и след launch.</h2>
+        </div>
+        <div className={styles.insightGrid}>
+          {articles.slice(-4).map((article) => (
+            <Link key={article.slug} href={'/articles/' + article.slug} className={styles.insightCard}>
+              <span>{article.category}</span><h3>{article.title}</h3><p>{article.description}</p><strong>Прочети →</strong>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className={styles.bottomCta}>
         <div>
           <span>READY TO BUILD?</span>
@@ -125,5 +140,5 @@ export default function HomePage() {
 }
 
 export async function getStaticProps() {
-  return { props: { title: 'Дигитален проектен партньор' } };
+  return { props: { title: 'Дигитален проектен партньор', description: 'Евгени Георгиев изгражда бизнес сайтове, e-commerce решения, Python автоматизации и ERP/API интеграции с фокус върху контрол, доверие и измерими процеси.', canonical: 'https://evgeni-georgiev.com' } };
 }

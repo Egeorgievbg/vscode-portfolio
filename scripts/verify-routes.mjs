@@ -2,16 +2,20 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
+
 const requiredStaticPages = [
   'pages/index.tsx',
   'pages/about.tsx',
   'pages/services.tsx',
+  'pages/services/[slug].tsx',
   'pages/projects.tsx',
   'pages/projects/[slug].tsx',
   'pages/articles.tsx',
   'pages/articles/[slug].tsx',
   'pages/contact.tsx',
   'pages/github.tsx',
+  'pages/privacy.tsx',
+  'pages/tools/project-brief.tsx',
   'pages/settings.tsx',
   'pages/404.tsx',
 ];
@@ -23,40 +27,79 @@ const requiredDataFiles = [
   'data/articles.ts',
 ];
 
-const requiredFiles = [...requiredStaticPages, ...requiredDataFiles];
+const requiredPublicFiles = [
+  'public/robots.txt',
+  'public/sitemap.xml',
+  'public/llms.txt',
+];
+
+const requiredFiles = [...requiredStaticPages, ...requiredDataFiles, ...requiredPublicFiles];
 const missing = requiredFiles.filter((file) => !fs.existsSync(path.join(root, file)));
 
-const projectSource = fs.readFileSync(path.join(root, 'data/projects.ts'), 'utf8');
-const articleSource = fs.readFileSync(path.join(root, 'data/articles.ts'), 'utf8');
-
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const extractSlugs = (source) =>
   [...source.matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((match) => match[1]);
+
 const duplicateValues = (values) =>
-  values.filter((value, index) => values.indexOf(value) !== index);
+  [...new Set(values.filter((value, index) => values.indexOf(value) !== index))];
 
-const projectSlugs = extractSlugs(projectSource);
-const articleSlugs = extractSlugs(articleSource);
-const duplicateProjectSlugs = [...new Set(duplicateValues(projectSlugs))];
-const duplicateArticleSlugs = [...new Set(duplicateValues(articleSlugs))];
-const invalidSlugs = [...projectSlugs, ...articleSlugs].filter(
-  (slug) => !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)
-);
+const serviceSlugs = extractSlugs(read('data/services.ts'));
+const projectSlugs = extractSlugs(read('data/projects.ts'));
+const articleSlugs = extractSlugs(read('data/articles.ts'));
 
-if (
-  missing.length ||
-  duplicateProjectSlugs.length ||
-  duplicateArticleSlugs.length ||
-  invalidSlugs.length
-) {
-  if (missing.length) console.error('Missing required files:', missing.join(', '));
-  if (duplicateProjectSlugs.length)
-    console.error('Duplicate project slugs:', duplicateProjectSlugs.join(', '));
-  if (duplicateArticleSlugs.length)
-    console.error('Duplicate article slugs:', duplicateArticleSlugs.join(', '));
-  if (invalidSlugs.length) console.error('Invalid slugs:', invalidSlugs.join(', '));
-  process.exit(1);
+const slugGroups = [
+  ['service', serviceSlugs],
+  ['project', projectSlugs],
+  ['article', articleSlugs],
+];
+
+let failed = false;
+
+if (missing.length) {
+  console.error('Missing required files:', missing.join(', '));
+  failed = true;
 }
 
+for (const [type, slugs] of slugGroups) {
+  const duplicates = duplicateValues(slugs);
+  const invalid = slugs.filter((slug) => !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug));
+
+  if (duplicates.length) {
+    console.error(`Duplicate ${type} slugs:`, duplicates.join(', '));
+    failed = true;
+  }
+
+  if (invalid.length) {
+    console.error(`Invalid ${type} slugs:`, invalid.join(', '));
+    failed = true;
+  }
+}
+
+if (!missing.includes('public/sitemap.xml')) {
+  const sitemap = read('public/sitemap.xml');
+  const expectedUrls = [
+    ...serviceSlugs.map((slug) => `https://evgeni-georgiev.com/services/${slug}`),
+    ...projectSlugs.map((slug) => `https://evgeni-georgiev.com/projects/${slug}`),
+    ...articleSlugs.map((slug) => `https://evgeni-georgiev.com/articles/${slug}`),
+  ];
+
+  const missingFromSitemap = expectedUrls.filter((url) => !sitemap.includes(`<loc>${url}</loc>`));
+
+  if (missingFromSitemap.length) {
+    console.error('Missing dynamic URLs from sitemap:', missingFromSitemap.join(', '));
+    failed = true;
+  }
+}
+
+if (failed) process.exit(1);
+
 console.log(
-  `Route verification passed: ${requiredStaticPages.length} route files, ${projectSlugs.length} projects, ${articleSlugs.length} articles.`
+  [
+    'Route verification passed:',
+    `${requiredStaticPages.length} route files`,
+    `${serviceSlugs.length} services`,
+    `${projectSlugs.length} projects`,
+    `${articleSlugs.length} articles`,
+    'sitemap coverage OK',
+  ].join(' ')
 );
